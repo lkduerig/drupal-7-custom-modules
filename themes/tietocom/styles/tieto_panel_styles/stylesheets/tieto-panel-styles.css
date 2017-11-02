@@ -1,0 +1,274 @@
+                    /*
+$icons-spacing: 20px;
+$icons-position: 50%;
+@import "icons/*.png";
+
+$large-spacing: 20px;
+$large-position: 50%;
+@import "icons/large/*.png";
+*/
+/* It is possible that not all of the following are necessary */
+/* Layout */
+@media all and (min-width: 761px) {
+  .panel-region_two_col .tieto-pane-wrapper,
+  .panel-region_three_col .tieto-pane-wrapper,
+  .panel-region_four_col .tieto-pane-wrapper,
+  .panel-region_ten_col .tieto-pane-wrapper {
+    float: left;
+  }
+
+  .panel-region_two_col .pane_span_one_col {
+    width: 50%;
+  }
+  .panel-region_two_col .pane_span_two_col {
+    width: 100%;
+  }
+
+  .panel-region_three_col .pane_span_one_col {
+    width: 33.3%;
+  }
+  .panel-region_three_col .pane_span_two_col {
+    width: 66.6%;
+  }
+  .panel-region_three_col .pane_span_three_col {
+    width: 100%;
+  }
+
+  .panel-region_four_col .pane_span_one_col {
+    width: 25%;
+  }
+  .panel-region_four_col .pane_span_two_col {
+    width: 50%;
+  }
+  .panel-region_four_col .pane_span_three_col {
+    width: 75%;
+  }
+  .panel-region_four_col .pane_span_four_col {
+    width: 100%;
+  }
+  .panel-region_ten_col .pane_span_one_col {
+    width: 10%;
+  }
+  .panel-region_ten_col .pane_span_two_col {
+    width: 20%;
+  }
+  .panel-region_ten_col .pane_span_three_col {
+    width: 30%;
+  }
+  .panel-region_ten_col .pane_span_four_col {
+    width: 40%;
+  }
+  .panel-region_ten_col .pane_span_five_col {
+    width: 50%;
+  }
+  .panel-region_ten_col .pane_span_six_col {
+    width: 60%;
+  }
+  .panel-region_ten_col .pane_span_seven_col {
+    width: 70%;
+  }
+  .panel-region_ten_col .pane_span_eight_col {
+    width: 80%;
+  }
+  .panel-region_ten_col .pane_span_nine_col {
+    width: 90%;
+  }
+  .panel-region_ten_col .pane_span_ten_col {
+    width: 100%;
+  }
+}
+@media all and (min-width: 761px) and (min-width: 761px) and (max-width: 1023px) {
+  .panel-region_four_col .pane_span_one_col {
+    width: 50%;
+  }
+  .panel-region_four_col .pane_span_two_col {
+    width: 100%;
+  }
+  .panel-region_four_col .pane_span_three_col {
+    width: 100%;
+  }
+}
+
+.tieto-pane-wrapper {
+  overflow: hidden;
+}
+
+.tieto-panel-styles-region {
+  overflow: hidden;
+}
+
+.tieto-panel-styles-region .panel-pane,
+.tieto-pane-wrapper .panel-pane {
+  overflow: hidden;
+  padding: 0.5em 20px;
+}
+.tieto-panel-styles-region .panel-pane .pane-content,
+.tieto-pane-wrapper .panel-pane .pane-content {
+  margin-bottom: 0.625em;
+}
+
+.tieto-pane-wrapper h2.pane-title, .tieto-pane-wrapper h2.field-content {
+  margin-top: 0.625em;
+  margin-bottom: 0.625em;
+}
+
+/* Title and icon styles */
+.icons-sprite, .pane_icon_event h2.pane-title:before, .pane_icon_event h2.field-content:before, .pane_icon_ircorner h2.pane-title:before, .pane_icon_ircorner h2.field-content:before, .pane_icon_jobsearch h2.pane-title:before, .pane_icon_jobsearch h2.field-content:before, .pane_icon_news h2.pane-title:before, .pane_icon_news h2.field-content:before, .pane_icon_topstories h2.pane-title:before, .pane_icon_topstories h2.field-content:before, .pane_icon_search h2.pane-title:before, .pane_icon_search h2.field-content:before {
+  background: url('../images/icons-s5855b4b031.png') no-repeat;
+}
+
+.pane_h1_title h2.pane-title, .pane_h1_title h2.field-content {
+  font-size: 1.875em;
+  line-height: 1.33333em;
+  margin-top: 0.66667em;
+  margin-bottom: 0.66667em;
+}
+
+.pane_icon_none h2.pane-title, .pane_icon_none h2.field-content {
+  font-size: 1.3125em;
+  line-height: 1.42857em;
+}
+.pane_icon_none h2.pane-title a, .pane_icon_none h2.field-content a {
+  color: #0065a1;
+}
+.pane_icon_none h2.pane-title a:hover, .pane_icon_none h2.field-content a:hover {
+  color: #d51968;
+}
+
+.pane_icon_event h2.pane-title, .pane_icon_event h2.field-content {
+  font-size: 1.3125em;
+  line-height: 1.42857em;
+  color: #0065a1;
+  padding-left: 47px;
+  position: relative;
+}
+.pane_icon_event h2.pane-title:before, .pane_icon_event h2.field-content:before {
+  content: "";
+  left: 0;
+  top: 0;
+  position: absolute;
+  background-position: -4px -676px;
+  height: 32px;
+  width: 33px;
+}
+.pane_icon_event h2.pane-title a, .pane_icon_event h2.field-content a {
+  color: #0065a1;
+}
+.pane_icon_event h2.pane-title a:hover, .pane_icon_event h2.field-content a:hover {
+  color: #d51968;
+}
+
+.pane_icon_ircorner h2.pane-title, .pane_icon_ircorner h2.field-content {
+  font-size: 1.3125em;
+  line-height: 1.42857em;
+  color: #0065a1;
+  padding-left: 47px;
+  position: relative;
+}
+.pane_icon_ircorner h2.pane-title:before, .pane_icon_ircorner h2.field-content:before {
+  content: "";
+  left: 0;
+  top: 0;
+  position: absolute;
+  background-position: -2px -832px;
+  height: 32px;
+  width: 38px;
+}
+.pane_icon_ircorner h2.pane-title a, .pane_icon_ircorner h2.field-content a {
+  color: #0065a1;
+}
+.pane_icon_ircorner h2.pane-title a:hover, .pane_icon_ircorner h2.field-content a:hover {
+  color: #d51968;
+}
+
+.pane_icon_jobsearch h2.pane-title, .pane_icon_jobsearch h2.field-content {
+  font-size: 1.3125em;
+  line-height: 1.42857em;
+  color: #0065a1;
+  padding-left: 47px;
+  position: relative;
+}
+.pane_icon_jobsearch h2.pane-title:before, .pane_icon_jobsearch h2.field-content:before {
+  content: "";
+  left: 0;
+  top: 0;
+  position: absolute;
+  background-position: -2px -572px;
+  height: 32px;
+  width: 38px;
+}
+.pane_icon_jobsearch h2.pane-title a, .pane_icon_jobsearch h2.field-content a {
+  color: #0065a1;
+}
+.pane_icon_jobsearch h2.pane-title a:hover, .pane_icon_jobsearch h2.field-content a:hover {
+  color: #d51968;
+}
+
+.pane_icon_news h2.pane-title, .pane_icon_news h2.field-content {
+  font-size: 1.3125em;
+  line-height: 1.42857em;
+  color: #0065a1;
+  padding-left: 47px;
+  position: relative;
+}
+.pane_icon_news h2.pane-title:before, .pane_icon_news h2.field-content:before {
+  content: "";
+  left: 0;
+  top: 0;
+  position: absolute;
+  background-position: 0 -416px;
+  height: 32px;
+  width: 42px;
+}
+.pane_icon_news h2.pane-title a, .pane_icon_news h2.field-content a {
+  color: #0065a1;
+}
+.pane_icon_news h2.pane-title a:hover, .pane_icon_news h2.field-content a:hover {
+  color: #d51968;
+}
+
+.pane_icon_topstories h2.pane-title, .pane_icon_topstories h2.field-content {
+  font-size: 1.3125em;
+  line-height: 1.42857em;
+  color: #0065a1;
+  padding-left: 47px;
+  position: relative;
+}
+.pane_icon_topstories h2.pane-title:before, .pane_icon_topstories h2.field-content:before {
+  content: "";
+  left: 0;
+  top: 0;
+  position: absolute;
+  background-position: -1px -728px;
+  height: 32px;
+  width: 39px;
+}
+.pane_icon_topstories h2.pane-title a, .pane_icon_topstories h2.field-content a {
+  color: #0065a1;
+}
+.pane_icon_topstories h2.pane-title a:hover, .pane_icon_topstories h2.field-content a:hover {
+  color: #d51968;
+}
+
+.pane_icon_search h2.pane-title, .pane_icon_search h2.field-content {
+  font-size: 1.3125em;
+  line-height: 1.42857em;
+  color: #0065a1;
+  padding-left: 47px;
+  position: relative;
+}
+.pane_icon_search h2.pane-title:before, .pane_icon_search h2.field-content:before {
+  content: "";
+  left: 0;
+  top: 0;
+  position: absolute;
+  background-position: -5px -780px;
+  height: 32px;
+  width: 32px;
+}
+.pane_icon_search h2.pane-title a, .pane_icon_search h2.field-content a {
+  color: #0065a1;
+}
+.pane_icon_search h2.pane-title a:hover, .pane_icon_search h2.field-content a:hover {
+  color: #d51968;
+}

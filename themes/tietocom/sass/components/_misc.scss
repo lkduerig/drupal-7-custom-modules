@@ -1,0 +1,5 @@
+// #TIET-2541
+.linkit-wrapper {
+  @include border-radius($base_unit);
+  z-index: 1002;
+}

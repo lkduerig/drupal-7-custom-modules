@@ -1,0 +1,512 @@
+//
+// Custom sass mixins
+//
+// To use a mixin in this file, add this line to the top of your .scss file:
+//   @import "base";
+// Then to use a mixin for a particular rule, add this inside the ruleset's
+// curly brackets:
+//   @include mix-in-name;
+
+// see _variables for break-points
+@mixin respond-to($media){
+  @if $media == handheld {
+    @media all and (max-width: $break1) { @content; }
+  }
+  @else if $media == narrow {
+    //@media all and (min-width: 481px) and (max-width: 960px) { @content; }
+    @media all and (min-width: $break1 + 1) { @content; }
+  }
+  @else if $media == narrow-only {
+    //@media all and (min-width: 481px) and (max-width: 960px) { @content; }
+    @media all and (min-width: $break1 + 1) and (max-width: $break2 - 1) { @content; }
+  }
+  @else if $media == normal {
+    //@media all and (min-width: 961px) and (max-width: 1220px) { @content; }
+    @media all and (min-width: $break2) { @content; }
+  }
+  @else if $media == wide {
+    @media all and (min-width: $break3) { @content; }
+  }
+  @else if $media == tab-portrait {
+    // specifically target tablet of 768px wide in portrait mode
+    //@media all and (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) { @content; }
+    @media all and (min-width: $break1) and (max-width: $break2) and (orientation: portrait) { @content; }
+  }
+  @else if $media == tab-landscape {
+    // specifically target tablet of 1024px wide in landscape mode
+    //@media all and (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) { @content; }
+    @media all and (min-width: $break1) and (max-width: $break2) and (orientation: landscape) { @content; }
+  }
+  @else if $media == all {
+    @content;
+  }
+}
+
+@mixin limit-lines($lines, $font-size: $base-font-size, $width: narrow) {
+  // Make sure $relative-font-sizing is not set to false
+  @include respond-to($width) {
+    max-height: $lines * rhythm(lines-for-font-size($font-size), $font-size);
+    overflow: hidden;
+    display: block;
+  }
+}
+
+@mixin limit-width($chars, $font-size: $base-font-size) {
+  // Make sure $relative-font-sizing is not set to false
+  //max-width: ($font-size / $base-font-size) * $width;
+  max-width: ($font-size / $base-font-size) * $chars * 8px;
+}
+
+// element-invisible as defined by http://snook.ca/archives/html_and_css/hiding-content-for-accessibility
+@mixin element-invisible {
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  @if $legacy-support-for-ie6 or $legacy-support-for-ie7 {
+    clip: rect(1px 1px 1px 1px); // IE6 and IE7 use the wrong syntax.
+  }
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
+// Turns off the element-invisible effect.
+@mixin element-invisible-off {
+  position: static !important;
+  clip: auto;
+  height: auto;
+  width: auto;
+  overflow: auto;
+}
+
+@mixin element-focusable {
+  @include element-invisible;
+
+  &:active,
+  &:focus {
+    @include element-invisible-off;
+  }
+}
+
+// The word "Unpublished" displayed underneath unpublished nodes and comments.
+@mixin unpublished-div {
+  height: 0;
+  overflow: visible;
+  color: #d8d8d8;
+  font-size: 75px;
+  line-height: 1;
+  font-family: Impact, "Arial Narrow", Helvetica, sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+  word-wrap: break-word; // A very nice CSS3 property
+
+  @if $legacy-support-for-ie6 or $legacy-support-for-ie7 {
+    .lt-ie8 &>* {
+      position: relative; // Otherwise these elements will appear below the "Unpublished" text.
+    }
+  }
+}
+
+// General-purpose handy mixins
+@mixin fake-element($position: before) {
+  position: relative;
+  &:#{$position} {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    @if $position == before {
+      left: 0;
+    }
+    @else if $position == after {
+      right: 0;
+    }
+  }
+}
+
+@mixin title-font($font-size: $h1-font-size, $family: $alt-font-family-light, $rhythm: 0.5) {
+  font-family: $family;
+  font-weight: normal;
+  @include apply-margin($rhythm, $font-size);
+}
+
+@mixin un-title-font {
+  font-family: $base-font-family;
+  font-weight:bold;
+}
+
+@mixin adjust-title-font-size-to($font-size, $from-size: $base-font-size, $rhythm: 1 ) {
+  // @mixin adjust-font-size-to doesn't take care of margin adjustment
+
+  @include adjust-font-size-to( $font-size, lines-for-font-size($font-size), $from-size );
+  //@include leader($rhythm, $font-size);
+  //@include trailer($rhythm, $font-size);
+  @include apply-margin($rhythm, $font-size);
+}
+
+@mixin apply-margin($rhythm: 0.5, $font-size: $base-font-size) {
+  @include leader($rhythm, $font-size);
+  @include trailer($rhythm, $font-size);
+}
+
+@mixin writers-cramp() {
+  letter-spacing: -0.5px;
+}
+
+@mixin link-hover($color: $primary-blue, $hover-color: $primary-red) {
+  color: $color;
+  cursor: pointer;
+  &:hover {
+    color: $hover-color;
+  }
+}
+
+@mixin background-hover($color: $primary-light-blue, $hover-color: $primary-blue) {
+  background-color: $color;
+  cursor: pointer;
+  &:hover {
+    color: $hover-color;
+  }
+}
+
+@mixin arrow-hover-down {
+  padding: 5px 14px 8px 13px;
+
+  &:hover {
+    background-color: $light-gray;
+    > a {
+      background-image: url("../images/arrow-blue-down.png");
+      color: $highlight-blue;
+    }
+  }
+  > a {
+    background: transparent url("../images/arrow-white-down.png") no-repeat right 50%;
+    color: $white;
+    padding-right: 14px;
+    &:hover {
+    }
+  }
+}
+
+@mixin arrow-blue  {
+  background: url("../images/arrow-blue.png") no-repeat left .5em;
+  margin-bottom: .5em;
+  padding-left: 10px;
+}
+
+@mixin arrow-white  {
+  background: url("../images/arrow-white.png") no-repeat left .5em;
+  margin-bottom: .5em;
+  padding-left: 10px;
+}
+
+@mixin mobile-blue-menu {
+  position: relative;
+  height: $base-line-height + 14;
+  overflow: visible;
+  .mobile-nav-wrapper {
+    border: 1px solid $primary-blue;
+
+    .show-content {
+      .show-content-link {
+        background: transparent url("../images/arrow-blue-down.png") no-repeat right 50%;
+
+        color: $primary-blue;
+        display: block;
+        line-height: $base-line-height;
+        padding: 6px 0 6px 6px;
+        margin-right: 6px;
+      }
+    }
+  }
+
+  .mobile-hidden-content {
+    display: none;
+    background-color: $gray-1;
+    padding: 10px;
+
+    a {
+      color: $primary-blue;
+    }
+  }
+
+  div > ul.menu,
+  form {
+    margin: 0px;
+  }
+}
+
+@mixin mobile-hidden-navigation {
+  @include respond-to(handheld) {
+    ul.menu {
+      margin: 0;
+      li {
+        margin: 0;
+        a, span.nolink {
+          display: block;
+          padding: $block-text-padding;
+        }
+      }
+    }
+  }
+  span.toggle-nav, span.leaf {
+    clear: right;
+    content: "";
+    float: right;
+    margin: $block-text-padding;
+    margin-left: 0;
+    @include respond-to(narrow) {
+      display: none;
+    }
+  }
+}
+
+@mixin mobile-hidden-content-nav {
+  @include mobile-hidden-navigation;
+
+  .show-content a {
+    @extend %mobile-hidden-content-nav-sprite-icon;
+  }
+  @include respond-to(handheld) {
+    .show-content {
+      @include adjust-font-size-to($handheld-nav-font-size);
+      display: block;
+      background-color: $primary-blue;
+      a {
+        color: $white;
+        padding: $block-text-padding;
+        display: block;
+      }
+    }
+    .mobile-hidden-content {
+      display: none;
+    }
+    div > ul.menu {
+      margin: 1em 0;
+    }
+  }
+  @include respond-to(narrow) {
+    div.show-content {
+      display: none;
+    }
+  }
+}
+
+@mixin sprite-arrow-link {
+  margin-bottom: 10px;
+  color: $primary-blue;
+  padding-left: $indent-amount;
+  display: block;
+  &:before {
+    @extend .icons-arrow-blue;
+    content: "";
+    padding-left: $indent-amount;
+    position: relative;
+    margin-left: $indent-amount * -1;
+    @include align-icon();
+  }
+  &:hover, &.active {
+    color: $primary-red;
+    &:before {
+      @extend .icons-arrow-red;
+    }
+  }
+}
+
+@mixin sprite-icons-menu() {
+  padding-left: $indent-amount;
+  li {
+    list-style: none;
+    margin: 10px 0;
+
+    a {
+      color: $primary-blue;
+      &:before {
+        @extend .icons-arrow-blue;
+        content: "";
+        padding-left: $indent-amount;
+        position: relative;
+        margin-left: $indent-amount * -1;
+        @include align-icon();
+      }
+      &:hover, &.active {
+        color: $primary-red;
+        &:before {
+          @extend .icons-arrow-red;
+        }
+      }
+      margin-bottom: 0;
+    }
+  }
+
+  li.expanded > a {
+    &:before {
+      @extend .icons-arrow-blue-down;
+    }
+    &:hover:before, &.active:before {
+      @extend .icons-arrow-red-down;
+    }
+  }
+}
+
+@mixin align-icon($height:7) {
+  position: relative;
+  top: ($base-font-size - $height) / 2;
+  @include respond-to(narrow-only) {
+    top: ($narrow-base-font-size - $height) / 2;
+  }
+}
+
+@mixin extended-background($alignment: left, $bg-color: $gray-13) {
+  position: relative;
+  overflow: visible;
+  padding: 20px;
+  z-index: 1;
+  //margin-top: 20px;
+  @if $alignment == left {
+    padding-left: 0;
+  }
+  @if $alignment == right {
+    padding-right: 0;
+  }
+  &:before {
+    background-color: $bg-color;
+    content: "";
+    //margin-top: -1em;
+    position: absolute;
+    height: 100%;
+    top: 0;
+    width: $break3;
+    z-index: -1;
+    @if $alignment == left {
+      right: 0;
+    }
+    @if $alignment == right {
+      left: 0;
+    }
+  }
+}
+
+@mixin block-table() {
+  border-spacing: 2px;
+  th, td {
+    border: 0 none !important;
+    padding: $block-text-padding;
+  }
+  tbody tr, tbody tr:hover {
+    td {
+      background-color: $white ;
+      color: $base-font-color ;
+    }
+    th {
+      background-color: $gray-1 ;
+      color: $base-font-color;
+      font-weight: bold;
+    }
+  }
+}
+
+@mixin panel-tabs() {
+  border: 0;
+  //font-size: 0.8em;
+  @include adjust-font-size-to($reduced-base-font-size);
+
+  ul.horizontal-tabs-list {
+    background: none;
+    border-bottom: 1px solid $primary-blue;
+    border-right: none;
+
+    li {
+      border:none;
+      margin-right: 5px;
+
+      &:focus{
+        outline: none;
+      }
+
+      &.horizontal-tab-button{
+        background:none;
+        border:none;
+        a{
+          background-color: $gray-1;
+          color: $primary-blue;
+          font-weight: normal;
+          top:1px;
+          padding: 0.5em 1em 0.3em 1.2em;
+          strong{
+            font-weight: lighter;
+          }
+
+          &:hover{
+            background-color: $primary-blue;
+            color: white;
+          }
+        }
+      }
+
+      &.selected{
+        a{
+          background-color: $primary-blue;
+          top:1px;
+          strong{
+            font-weight: bold;
+            color: white;
+          }
+        }
+      }
+    }
+  }
+}
+
+@mixin after-clearfix() {
+  &:after {
+    content: ".";
+    visibility: hidden;
+    display: block;
+    height: 0;
+    clear: both;
+  }
+}
+
+@mixin submit-button {
+  @include link-hover($white, $white);
+  background-color: $primary-blue;
+  border: 0 none;
+  border-radius: 0;
+  margin: 1em 0;
+  padding: $button-padding;
+  &:hover {
+    background-color: $primary-red;
+  }
+}
+
+@mixin font-common($color: $base-font-color, $weight: normal) {
+  font-size: 14px; // What??!!
+  font-weight: $weight;
+  font-family: $arial;
+  color: $color;
+}
+
+@mixin border-radius($radius){
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -o-border-radius: $radius;
+  -ms-border-radius: $radius;
+  border-radius: $radius;
+}
+
+@mixin columns($column: inherit, $gap: 0, $rule: none){
+	-webkit-column-count: $column;
+	-webkit-column-gap: $gap;
+	-webkit-column-rule: $rule;
+	-moz-column-count: $column;
+	-moz-column-gap: $gap;
+	-moz-column-rule: $rule;
+	-o-column-count: $column;
+	-o-column-gap: $gap;
+	-o-column-rule: $rule;
+	column-count: $column;
+	column-gap: $gap;
+	column-rule: $rule;
+}

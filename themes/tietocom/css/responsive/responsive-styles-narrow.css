@@ -1,0 +1,7 @@
+/* According to mobile-first design, all styles outside this directory should apply
+   to screen widths less than 480px (one column for content).
+   This stylesheet will be loaded in addition on screen widths greater than 480px */
+/* line 5, ../../sass/responsive/responsive-styles-narrow.scss */
+body {
+  background: green;
+}

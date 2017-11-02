@@ -1,0 +1,67 @@
+/**
+ * @file
+ * Frontpage panel layout
+**/
+
+.frontpage {
+  margin: 4em auto;
+}
+
+.frontpage .panel-panel {
+  margin: 0;
+}
+
+.frontpage-container-inner {
+  float: left;
+  min-height: 1px;
+}
+
+.frontpage-sidebar {
+  width: 25%;
+}
+
+.frontpage-content {
+  width: 75%;
+}
+
+.frontpage-sidebar-inner {
+}
+
+.frontpage .panel-pane {
+  margin: 2px;
+}
+/* iPhone [portrait + landscape] */
+@media only screen and (max-width: 480px) {
+
+  .frontpage {
+    margin-top: 0;
+  }
+
+  .frontpage-container-inner {
+    width: 100%;
+    float: none;
+  }
+
+  .frontpage-sidebar-inner {
+    margin-right: 0;
+  }
+  .frontpage .panel-pane {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+@media only screen and (min-width: 481px) and (max-width: 959px) {
+  .frontpage {
+    margin-top: 0;
+  }
+
+  .frontpage-container-inner {
+    width: 100%;
+    float: none;
+  }
+
+  .frontpage-sidebar-inner {
+    margin-right: 0;
+  }
+}

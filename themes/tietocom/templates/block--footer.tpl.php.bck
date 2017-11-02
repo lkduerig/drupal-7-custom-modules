@@ -1,0 +1,10 @@
+<?php
+
+/**
+ * @file
+ * Default theme implementation to display a block in footer.
+ * Usually only for javascript -stuff so no need to have any layout
+ *
+ */
+?>
+<?php print $content ?>

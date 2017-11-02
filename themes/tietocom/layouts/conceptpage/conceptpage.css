@@ -1,0 +1,30 @@
+/**
+ * @file
+ * Tieto industry hub panel layout
+**/
+
+.industryhub {
+  margin: 2em auto;
+}
+
+.industryhub .panel-panel {
+  margin: 0;
+}
+
+
+
+
+.industryhub .panel-pane {
+  margin: 2px;
+}
+
+/* iPhone [portrait + landscape] */
+@media only screen and (max-width: 480px) {
+  .industryhub .panel-pane {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+@media all and (min-width: 481px) {
+}

@@ -1,0 +1,137 @@
+.view-key-topics-phases {
+  table.views-view-grid {
+    border-collapse: separate;
+    border-spacing: 20px;
+    margin: 0 20px;
+    @include respond-to(handheld) {
+      margin: 0 -20px;
+    }
+  }
+  .cp-tile:not(.selected) {
+    cursor: pointer;
+    @include adjust-font-size-to($sidebar-font-size);
+  }
+  .views-row.selected {
+    height: auto !important;
+    width: 66.6667% !important;
+    @include respond-to(handheld) {
+      width: 100% !important;
+    }
+    iframe {
+      @include respond-to(handheld) {
+        width: 100%;
+      }
+      @include respond-to(tab-portrait) {
+        width: 100% !important;
+      }
+    }
+    .node-contact {
+      .contact-title {
+        font-weight: 700;
+      }
+      img {
+        display: none;
+      }
+    }
+    .views-field-addtoany-link {
+      padding: 30px 20px 0 20px;
+    }
+  }
+  .field-name-field-basic-image-image {
+    background-position: center center;
+    background-size: 1800px auto;
+  }
+
+  table.views-view-grid.cols-3 td:first-child {
+    margin-top: 0;
+  }
+  .view-content {
+    vertical-align: top;
+    margin: 0;
+  }
+    .views-row {
+      width: 33.334%;
+      vertical-align: top;
+      float: left;
+      @include respond-to(handheld) {
+        display: block;
+        width: 100%;
+      }
+      .views-row.selected {
+        .key-topics-tiles-container {
+          width: inherit;
+        }
+      }
+      .key-topics-tiles-container {
+        background-color: $gray-13;
+        margin: 10px;
+        @include respond-to(handheld) {
+          margin: 10px 0;
+        }
+        @include respond-to(tab-portrait) {
+          margin: 10px;
+        }
+        padding: 20px;
+        min-height: 280px;
+        overflow: hidden;
+        position: relative;
+
+        .key-topics-visible {
+          max-height: 280px;
+          .key-topics-tiles-title {
+            @include title-font();
+            @include adjust-font-size-to($h2-font-size);
+            @include link-hover();
+          }
+          .key-topics-tiles-media {
+            display: block;
+            margin: 10px 0;
+            position: relative;
+            text-align: center;
+
+            .field-type-image:before {
+              background: url("/sites/all/themes/tietocom/images/arrow.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+              content: "";
+              height: 16px;
+              left: 46%;
+              position: absolute;
+              top: 46%;
+              width: 116px;
+            }
+          }
+        }
+
+        .key-topics-hidden {
+          .key-topics-tiles-title {
+//            display: block;
+//            margin-top: 20px;
+              @include title-font();
+              @include adjust-font-size-to($h1-font-size);
+          }
+          .key-topics-tiles-body {
+            display: block;
+            margin: 10px 0;
+            .type-image.atom-align-left,
+            img[style*="float:left"],
+            img[style~="float:left"] { margin-right: 10px !important; margin-left: 0 !important;}
+            .type-image.atom-align-right,
+            img[style*="float:right"],
+            img[style~="float:right"] { margin-left: 10px !important; margin-right: 0 !important;}
+          }
+        }
+      }
+    }
+
+  /* Where are these used??
+
+    .views-field-title {
+      font-size: 14px;
+    }
+    .views-field-field-punchline {
+      line-height: 1.4;
+      overflow: hidden;
+      text-overflow: ellipse;
+    }
+    */
+//  }
+}

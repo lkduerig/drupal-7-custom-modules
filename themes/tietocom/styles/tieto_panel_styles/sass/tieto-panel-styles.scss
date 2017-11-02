@@ -1,0 +1,207 @@
+
+@import "../../../sass/variables";
+
+
+/* It is possible that not all of the following are necessary */
+@import "compass/support";  // Add Compass' IE and vendor prefix support variables.
+@import "compass/utilities/sprites"; // See http://compass-style.org/help/tutorials/spriting/
+@import "compass/css3";     // Use one CSS3 mixin instead of multiple vendor prefixes.
+@import "compass/typography/vertical_rhythm"; // Helps set up a vertical rhythm.
+
+
+@import "../../../sass/custom";
+
+
+/* Layout */
+@include respond-to(narrow) {
+.panel-region_two_col,
+.panel-region_three_col,
+.panel-region_four_col,
+.panel-region_ten_col {
+//  .pane_span_one_col,
+//  .pane_span_two_col,
+//  .pane_span_three_col,
+//  .pane_span_four_col {
+  .tieto-pane-wrapper {
+    float: left;
+  }
+}
+
+.panel-region_two_col {
+  .pane_span_one_col {
+    width: 50%
+  }
+  .pane_span_two_col {
+    width: 100%
+  }
+}
+
+.panel-region_three_col {
+  .pane_span_one_col {
+    width: 33.3%
+  }
+  .pane_span_two_col {
+    width: 66.6%
+  }
+  .pane_span_three_col {
+    width: 100%;
+  }
+}
+
+  .panel-region_four_col {
+    .pane_span_one_col {
+      width: 25%;
+    }
+    .pane_span_two_col {
+      width: 50%;
+    }
+    .pane_span_three_col {
+      width: 75%;
+    }
+    .pane_span_four_col {
+      width: 100%;
+    }
+    @include respond-to(narrow-only) {
+      .pane_span_one_col {
+        width: 50%;
+      }
+      .pane_span_two_col {
+        width: 100%;
+      }
+      .pane_span_three_col {
+        width: 100%;
+      }
+    }
+  }
+
+  .panel-region_ten_col {
+    .pane_span_one_col {
+      width: 10%;
+    }
+    .pane_span_two_col {
+      width: 20%;
+    }
+    .pane_span_three_col {
+      width: 30%;
+    }
+    .pane_span_four_col {
+      width: 40%;
+    }
+    .pane_span_five_col {
+      width: 50%;
+    }
+    .pane_span_six_col {
+      width: 60%;
+    }
+    .pane_span_seven_col {
+      width: 70%;
+    }
+    .pane_span_eight_col {
+      width: 80%;
+    }
+    .pane_span_nine_col {
+      width: 90%;
+    }
+    .pane_span_ten_col {
+      width: 100%;
+    }
+  }
+}
+
+//.tieto-panel-styles-region .tieto-pane-wrapper .panel-pane {
+//  margin: 2px;
+//}
+//
+//@include respond-to(handheld) {
+//  .tieto-panel-styles-region,
+//  .tieto-panel-styles-region .tieto-pane-wrapper .panel-pane {
+//    margin-left: 0;
+//    margin-right: 0;
+//  }
+//}
+
+.tieto-pane-wrapper {
+  overflow: hidden;
+}
+
+.tieto-panel-styles-region {
+  overflow: hidden;
+}
+.tieto-panel-styles-region .panel-pane,
+.tieto-pane-wrapper .panel-pane {
+  overflow: hidden;
+  padding: $block-text-padding;
+
+  .pane-content {
+    @include trailer(0.5);
+  }
+}
+
+.tieto-pane-wrapper h2.pane-title {
+  @include leader(0.5);
+  @include trailer(0.5);
+}
+
+
+/* Title and icon styles */
+
+
+$icons-spacing: 20px;
+$icons-position: 50%;
+
+$icons-sprite-dimensions: true;
+@import "icons/*.png";
+
+@mixin pane-title-icon($icon: none) {
+  @include adjust-font-size-to($h2-font-size);
+
+  @if ($icon != none) {
+    color: $primary-blue;
+    padding-left: 47px;
+    position: relative;
+    &:before {
+      content: "";
+      left: 0;
+      top: 0;
+      position: absolute;
+      @include icons-sprite($icon);
+    }
+  }
+
+  a {
+    color: $primary-blue;
+    &:hover {
+      color: $primary-red;
+    }
+  }
+}
+
+.pane_h1_title h2.pane-title {
+  @include adjust-title-font-size-to($h1-font-size);
+}
+
+.pane_icon_none h2.pane-title {
+  @include pane-title-icon(none);
+}
+.pane_icon_event h2.pane-title {
+  @include pane-title-icon(calendar);
+}
+.pane_icon_ircorner h2.pane-title {
+  @include pane-title-icon(ir);
+}
+.pane_icon_jobsearch h2.pane-title {
+  @include pane-title-icon(search_job);
+}
+.pane_icon_news h2.pane-title {
+  @include pane-title-icon(news);
+}
+.pane_icon_topstories h2.pane-title {
+  @include pane-title-icon(top_stories);
+}
+.pane_icon_search h2.pane-title {
+  @include pane-title-icon(search);
+}
+
+h2.field-content {
+  @extend h2.pane-title;
+}

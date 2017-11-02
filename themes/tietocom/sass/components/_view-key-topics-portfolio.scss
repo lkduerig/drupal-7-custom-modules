@@ -1,0 +1,23 @@
+// Rest of portfolio stuff should be moved here also
+.view-key-topics-portfolio {
+  h3 { // this would be better with a semantic classname, but we don't have one here
+    @include title-font($h2-font-size);
+    @include adjust-font-size-to($h2-font-size);
+  }
+
+  &.view-display-id-panel_pane_2 {
+    .views-row {
+      @include apply-margin();
+    }
+  }
+
+  .item-list {
+    > ul {
+      padding-left: 0;
+      list-style: none;
+      > li {
+
+      }
+    }
+  }
+}

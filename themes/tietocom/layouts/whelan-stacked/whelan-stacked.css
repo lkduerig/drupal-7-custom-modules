@@ -1,0 +1,49 @@
+/**
+ * @file
+ * Whelan panel layout
+**/
+
+.whelan-stacked-container {
+  margin-bottom: 1em;
+}
+
+.whelan-stacked-column-content-region {
+  min-height: 1px;
+  width: 25.532%;
+  float: left;
+}
+
+.whelan-stacked-column-content-region-inner,
+.whelan-stacked-column-content-bottom-region-inner {
+  margin-right: 20px;
+}
+
+.whelan-stacked-column2 {
+  width: 23.404%;
+}
+
+  .whelan-stacked-column2-inner {
+    margin-right: 0;
+  }
+
+.whelan-stacked-content {
+  width: 51.064%;
+}
+
+/* iPhone [portrait + landscape] */
+@media only screen and (max-width: 480px) {
+  .whelan-stacked-column-content-region,
+  .whelan-stacked-column2,
+  .whelan-stacked-content {
+    width: 100%;
+    float: none;
+  }
+
+  .whelan-stacked-column-content-region-inner {
+    margin-right: 0;
+  }
+
+  .whelan-stacked-column-content-region-inner table{
+    margin: 0;
+  }
+}

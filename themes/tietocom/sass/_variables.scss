@@ -1,0 +1,177 @@
+//
+// "variables" partial
+//
+
+//
+// Legacy IE support
+//
+// These variables are used by many mixins to add additional CSS to support
+// specific versions of IE or specific vendor prefixes.
+//
+// To turn on support for IE6 or IE7, set those variables to true.
+//
+// Zen does not require special handling for IE8 or later. But Compass uses that
+// variable for a couple edge cases. We include it for completeness sake. See
+// the documentation at http://compass-style.org/reference/compass/support/
+$legacy-support-for-ie6: false;
+$legacy-support-for-ie7: false;
+$legacy-support-for-ie8: true;
+
+// Breakpoints
+// If these change, they must also be changed manually in theme layout plugins and theme scripts
+//$break1:  480px;
+//$break1: 800px;
+//$break1: 768px;
+$break1: 760px;
+//$break2:  960px;
+$break2: 1024px;
+$break3:  1220px;
+
+
+//
+// Font faces, stacks and sizes.
+//
+
+// Compass' vertical_rhythm extension is a powerful tool to set up a vertical
+// rhythm for your entire page. You can see some of its mixins and functions in
+// use in the normalize.scss file.
+// @see http://compass-style.org/reference/compass/typography/vertical_rhythm/
+
+$base-font-size:   16px; // The font size set on the root html element.
+$base-line-height: 20px; // This line-height determines the basic unit of vertical rhythm.
+
+$narrow-base-font-size: 14px; // For tablet devices
+$narrow-base-line-height: 16px;
+
+$round-to-nearest-half-line: true;
+
+$h1-font-size: 1.875  * $base-font-size; // 30px
+$h2-font-size: 1.3125 * $base-font-size; // 21px, used in WYSIWYG
+$h3-font-size: 1.125  * $base-font-size; // 18px, used in WYSIWYG
+$h4-font-size: 0.875  * $base-font-size; // 14px, used in WYSIWYG
+$h5-font-size: 0.875  * $base-font-size; // 14px, not in use
+$h6-font-size: 0.75   * $base-font-size; // 12px, not in use
+
+
+$banner-font-size: 3      * $base-font-size; // 48px
+$reduced-base-font-size:  0.9375 * $base-font-size; // 15px
+$sidebar-font-size: 0.875 * $base-font-size; // 14px
+$tiny-heading-font-size: 0.75 * $base-font-size; // 12px
+$handheld-nav-font-size: 1.625 * $base-font-size; // 26px
+
+
+
+// The following font family declarations are based on the Microsoft core web
+// fonts which are common fonts available on most computer systems. The DejaVu
+// and Nimbus Sans fonts are commonly available on Linux systems where the MS
+// fonts are less common. Tahoma and Helvetica are also widely available.
+//
+// A user's web browser will look at the comma-separated list and will
+// attempt to use each font in turn until it finds one that is available
+// on the user's computer. The final "generic" font (sans-serif, serif or
+// monospace) hints at what type of font to use if the web browser doesn't
+// find any of the fonts in the list.
+
+// First, let's create some font stacks.
+$times-new-roman: "Times New Roman", Times, Georgia, "DejaVu Serif", serif;
+$times:           Times, "Times New Roman", Georgia, "DejaVu Serif", serif;
+$georgia:         Georgia, "Times New Roman", "DejaVu Serif", serif;
+
+$verdana:         Verdana, Tahoma, "DejaVu Sans", sans-serif;
+$tahoma:          Tahoma, Verdana, "DejaVu Sans", sans-serif;
+$helvetica:       Helvetica, Arial, "Nimbus Sans L", sans-serif;
+$arial:           Arial, Helvetica, "Nimbus Sans L", sans-serif;
+
+
+// For an explanation of why "sans-serif" is at the end of this list, see
+// http://meyerweb.com/eric/thoughts/2010/02/12/fixed-monospace-sizing/
+$courier:         "Courier New", "DejaVu Sans Mono", monospace, sans-serif;
+
+// Now create some variables for the font stacks we want to use on this site.
+$base-font-family: $arial; // The font family set on the html element.
+
+$alt-font-family-light: "HelveticaNeueW02-45Ligh", "Arial", sans-serif;
+//$alt-font-family-normal: "HelveticaNeueW02-55Roma", "Arial", sans-serif;
+$alt-font-family-normal: "Helvetica Neue LT W06 55 Roman", "Arial", sans-serif;
+$alt-font-family-heavy: "HelveticaNeueW02-85Heav", "Arial", sans-serif;
+$alt-font-family-black: "HelveticaNeueW02-95Blac", "Arial", sans-serif;
+
+$font-body:        $arial;
+$font-monospace:   $courier;
+
+$white:           #fff;
+$black:           #000;
+
+//
+// Tieto Corporate colors
+//
+
+// Primary colors
+$primary-red:         #d51968;
+$primary-orange:      #efb061;
+$primary-green:       #84c77b;
+$primary-blue:        #0065a1;
+$primary-light-blue:  #63b3e3;
+
+// Grayscale
+$gray-1:  #F0F0F0;
+$gray-2:  #E5E5E5;
+$gray-3:  #D2D2D2;
+$gray-5:  #C1C1C1;
+$gray-7:  #999999;
+$gray-9:  #7B7B7B;
+$gray-11: #5E5E5E;
+$gray-12: #EDEDED;
+$gray-13: #F8F8F8;
+
+// Functional colors
+$functional-orange:   #E13300;
+$functional-green:    #338200;
+$functional-red:      #A90000;
+$functional-blue:     #00409A;
+
+$light-blue: #63b3e3;
+$pale-blue: #acdaf4;
+$bright-red: #c00;
+
+$base-font-color: #505050;
+$header-font-color: $gray-11;
+
+$default-box-shadow-color: $gray-3;
+//$default-box-shadow-blur: 3px;
+$default-box-shadow-v-offset: 1px;
+
+$base_unit: 5px;
+
+//$block-text-padding: $base-font-size/2 $base-font-size;
+//$block-text-padding: $base-font-size/2 20px;
+$block-text-padding: .5em ($base_unit * 4);
+$button-padding: $base-font-size/2 ($base_unit * 8);
+
+$inline-padding: $base_unit * 2;
+
+
+//$background-narrow: #E7F1F3 none; /* mobile devices */
+//$background-normal: #E7F1F3 url("../images/bg/generic_bg_light.jpg") no-repeat 50% 0;
+
+// The amount lists, blockquotes and comments are indented.
+//$indent-amount: 16px;
+$indent-amount: $base_unit * 3;
+$gutter-width: $base_unit * 4;
+$handheld-wide-gutter-width: $base_unit * 6; // Mainly for header and footer
+$max-width: 1140px;
+$logo-width: 49px;
+$logo-height: 44px;
+$large-icon-size: 32px;
+
+
+
+/*
+$icons-spacing: 20px;
+$icons-position: 50%;
+@import "icons/*.png";
+
+$large-spacing: 20px;
+$large-position: 50%;
+@import "icons/large/*.png";
+*/

@@ -1,0 +1,390 @@
+/**
+ * @file
+ * Form Styling
+ */
+
+.form-item { /* Wrapper for a form element (or group of form elements) and its label */
+//  margin: .5em 0;
+  @include leader(0.5);
+  @include trailer(0.5);
+
+  input.error,
+  textarea.error,
+  select.error { /* Highlight the form elements that caused a form submission error */
+    border: 1px solid $bright-red;
+  }
+
+  label { /* The label for a form element */
+    display: block;
+    font-weight: bold;
+  }
+
+  label.option { /* The label for a radio button or checkbox */
+    display: inline;
+    font-weight: normal;
+  }
+
+  .form-required { /* The part of the label that indicates a required field */
+    color: $bright-red;
+  }
+
+  .description { /* The descriptive help text (separate from the label) */
+    font-size: 0.85em;
+  }
+
+  .form-checkboxes & ,
+  .form-radios & { /* Pack groups of checkboxes and radio buttons closer together */
+//    margin: 0; /* Drupal core uses "0.4em 0" */
+  }
+}
+
+.webform-client-form {
+  .form-actions {
+    clear: both;
+    .form-submit {
+      /* The submit button */
+      @include submit-button();
+      text-transform: uppercase;
+    }
+  }
+
+  fieldset {
+    border-width: 1px 0 0 0;
+    margin: 0;
+    padding: 1em 0;
+
+    legend {
+      @include adjust-font-size-to($h2-font-size);
+      font-weight: bold;
+      .fieldset-legend {
+        margin-right: 1em;
+      }
+    }
+  }
+
+  @include respond-to(handheld) {
+    .form-item {
+      input.form-text {
+        width: 98%;
+      }
+    }
+  }
+
+  @include respond-to(narrow) {
+    .form-item {
+      float: left;
+      width: 95%;
+      margin-right: 5%;
+      .form-item {
+        float: none;
+        width: auto;
+        margin-right: 0;
+      }
+    }
+    .form-type-select {
+      width: auto;
+      margin-right: 0;
+      float: none;
+    }
+    .fieldset-description {
+      margin-bottom: 1em;
+    }
+
+    .webform-component-textfield,
+    .webform-component-email {
+      width: 45%;
+      input.form-text {
+        width: 98%;
+      }
+    }
+  }
+
+  .webform-component-webform_grid table {
+    width: 100%;
+    margin: 0;
+    td.checkbox {
+      text-align: center;
+    }
+  }
+}
+
+
+.container-inline {
+  div,
+  label { /* Inline labels and form divs */
+    display: inline;
+  }
+}
+
+.tips { /* Tips for Drupal's input formats */
+}
+
+a.button { /* Buttons used by contrib modules like Media */
+  @include appearance(button);
+}
+
+/*
+ * Password confirmation
+ */
+
+.password-parent,
+.confirm-parent {
+  margin: 0;
+}
+
+/*
+ * Search (search-block-form.tpl.php)
+ */
+
+#block-search-form {
+  /* Wrapper for the search form */
+  form {
+    margin: 0.5em 0 1em 0;
+    position: relative;
+    @include respond-to(narrow) {
+      @include adjust-font-size-to($handheld-nav-font-size);
+    }
+  }
+  .form-item {
+    label {
+      clip: auto;
+      display: block;
+      font-weight: normal;
+      height: auto;
+      margin-bottom: 0.5em;
+      position: static !important;
+    }
+    input.form-text {
+      border: 1px solid $primary-blue;
+      padding: 3px 5px;
+      @include box-sizing(border-box);
+      width: 100%;
+    }
+  }
+
+  .form-actions input {
+    @include hide-text;
+    margin: 4px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    border: 0 none;
+  }
+}
+
+
+/*
+ * Drupal's default login form block
+ */
+
+#user-login-form {
+  text-align: left; /* LTR */
+
+  /*
+   * OpenID
+   *
+   * The default styling for the OpenID login link seems to assume Garland's
+   * styling of list items.
+   */
+
+  ul { /* OpenID creates a new ul above the login form's links. */
+    margin-bottom: 0; /* Position OpenID's ul next to the rest of the links. */
+  }
+
+  html.js & li.openid-link,
+  li.openid-link { /* The "Log in using OpenID" link. */
+    margin-top: 1.5em;
+    margin-left: -20px; /* LTR */ /* Un-do some of the padding on the ul list. */
+  }
+
+  li.user-link { /* The "Cancel OpenID login" link. */
+    margin-top: 1.5em;
+  }
+}
+
+#user-login ul {
+  margin: 1.5em 0;
+}
+
+/*
+ * Drupal admin tables
+ *
+ * We overrode these styles in normalize.css, but restore them for the admin
+ * section of the site.
+ */
+
+form {
+  th {
+    text-align: left; /* LTR */
+    padding-right: 1em; /* LTR */
+    border-bottom: 3px solid $gray-3;
+  }
+
+  tbody {
+    border-top: 1px solid $gray-3;
+  }
+
+  tr.even {
+    background-color: $white;
+  }
+
+  table .item-list ul {
+    margin: 0;
+  }
+}
+
+@if $legacy-support-for-ie6 or $legacy-support-for-ie7 {
+  .lt-ie8 tr.even,
+  .lt-ie8 tr.odd {
+    th,
+    td {
+      border-bottom: 1px solid $gray-3; /* IE doesn't display borders on table rows */
+    }
+  }
+}
+
+/*
+ * Drupal core wrongly puts this in system.menus.css. Since we override that, add it back.
+ */
+
+td.menu-disabled {
+  background: $gray-3;
+}
+
+/* Chosen -modules select lists */
+.chzn-container-multi {
+  @include adjust-font-size-to($sidebar-font-size);
+  background-color: $primary-blue;
+
+  .chzn-choices {
+    background: transparent url(/sites/all/themes/tietocom/images/arrow-white-down.png) no-repeat right center;
+    border: 0;
+    color: $white;
+    cursor: pointer;
+    margin-right: 10px;
+    @include box-shadow(none);
+
+    .search-choice{
+      background: $gray-1;
+      color: $primary-blue;
+    }
+    .search-field {
+      .default {
+        color: $white;
+      }
+    }
+  }
+
+  input{
+    outline: none;
+  }
+}
+
+.chzn-container {
+  .chzn-drop{
+    @include box-shadow(none);
+    border: 1px solid $primary-blue;
+  }
+  .chzn-results{
+    .highlighted {
+      background-color: $gray-1;
+      background-image: none;
+      color: $primary-blue;
+      filter: none;
+    }
+  }
+}
+
+#tieto-times-form .form-item {text-align: right;}
+
+
+#tieto-news-subscription-form {
+  max-width: 100%;
+  div #subscribe_form_container {
+    width: 100%;
+  }
+  .form-text {
+    max-width: 95%;
+  }
+
+  div #subscribe_form_container input {
+    width:100%;
+    display: none;
+  }
+
+  div #div_press_releases {
+    width:100%;
+  }
+
+  div #select_press_releases div, div #select_trade_releases div{
+    min-width:40%;
+    display:inline-block;
+  }
+
+  div #select_press_releases div.form-item-press-releases-Public {
+    min-width:33%;
+  }
+
+  #lang_container {
+    margin-top: 2em;
+    width:90%;
+  }
+
+  div #lang_container div{
+    display:inline-block;
+  }
+
+  .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+    @include font-common();
+  }
+
+  .ui-state-active, .ui-widget-content .ui-state-active, .ui-widget-header .ui-state-active  {
+    @include font-common(white, normal);
+    background: $primary-blue;
+    border: 1px solid #AAAAAA;
+  }
+
+  #label_stock_tab {
+    width:100%;
+    margin-top:3px;
+    height:30px;
+    background: url("/sites/all/modules/contrib/jquery_update/replace/ui/themes/base/images/ui-bg_glass_75_e6e6e6_1x400.png") repeat-x scroll 50% 50% #E6E6E6;
+    border: 1px solid #D3D3D3;
+    color: #555555;
+  }
+
+  .ui-state-active #header_stock_tab #span_stock_tab {
+      background: none repeat scroll 0 0 $primary-blue;
+      color: $white;
+  }
+
+  #header_stock_tab {
+    @include font-common();
+    text-align:left;
+    margin-top:0px;
+    margin-bottom:0px;
+    padding-left:15px;
+    line-height:1.3;
+  }
+
+  #span_stock_tab {
+    border:1px solid #AAAAAA;
+    padding:3px 7px;
+    text-align:center;
+  }
+
+  div .release_type_title {
+    font-size: 16px;
+    font-weight: bold;
+    font-family: $arial;
+    color: $base-font-color;
+    line-height:1.3;
+    padding-bottom:5px;
+
+  }
+
+  #subscribe_submit { 
+    @include submit-button();
+  }
+
+}

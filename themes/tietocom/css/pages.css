@@ -1,0 +1,939 @@
+@charset "UTF-8";
+/**
+ * @file
+ * Page Styling
+ *
+ * Style the markup found in page.tpl.php. Also includes some styling of
+ * miscellaneous Drupal elements that appear in the $content variable, such as
+ * ul.links, .pager, .more-link, etc.
+ */
+                    /*
+$icons-spacing: 20px;
+$icons-position: 50%;
+@import "icons/*.png";
+
+$large-spacing: 20px;
+$large-position: 50%;
+@import "icons/large/*.png";
+*/
+/*
+ * Body
+ */
+body {
+  margin: 0;
+  padding: 0;
+}
+
+/*
+ * Added padding to CKEditor
+ */
+.cke_editable {
+  padding: 0 20px 5px;
+}
+
+/*
+ * The skip-link link will be completely hidden until a user tabs to the link.
+ * See the element-focusable rule in system.base.css.
+ */
+#skip-link {
+  margin: 0;
+}
+#skip-link a,
+#skip-link a:visited {
+  display: block;
+  width: 100%;
+  padding: 2px 0 3px 0;
+  text-align: center;
+  background-color: #666;
+  color: #fff;
+}
+
+/*
+ * Header
+ */
+#header {
+  color: white;
+  position: relative;
+  margin-bottom: 2em;
+}
+@media all and (max-width: 760px) {
+  #header {
+    background-color: primary-light-blue;
+    overflow: visible;
+  }
+}
+
+#header div.header-image {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  top: 0;
+  background-color: #63b3e3;
+  background-position: right top;
+  -webkit-background-size: 100% 100%;
+  -moz-background-size: 100% 100%;
+  -o-background-size: 100% 100%;
+  background-size: 100% 100%;
+}
+@media all and (min-width: 1024px) {
+  #header div.header-image {
+    background-position: center top;
+    -webkit-background-size: 100% auto;
+    -moz-background-size: 100% auto;
+    -o-background-size: 100% auto;
+    background-size: 100% auto;
+  }
+}
+@media all and (max-width: 760px) {
+  #header div.header-image {
+    background: #63b3e3;
+  }
+}
+
+#maintenance_page {
+  background-color: #63b3e3;
+  height: 220px;
+}
+
+#main_logo {
+  /* Wrapping link for logo */
+  float: right;
+  padding: 10;
+  margin: 10;
+}
+
+#logo-title {
+  float: right;
+  padding-right: 110px;
+  padding-top: 15px;
+}
+
+#main_body {
+  padding-top: 110px;
+}
+
+#main_content {
+  padding-top: 50px;
+  padding-left: 110px;
+}
+
+@media all and (max-width: 760px) {
+  #maintenance_page {
+    height: 104px;
+  }
+
+  #logo-title {
+    padding-right: 35px;
+    padding-top: 25px;
+  }
+
+  #main_content {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 50px;
+  }
+}
+.header-inner {
+  padding-top: 10px;
+  overflow: visible;
+}
+@media all and (max-width: 760px) {
+  .header-inner {
+    padding: 30px;
+  }
+}
+@media all and (min-width: 761px) {
+  .header-inner:after {
+    content: ".";
+    visibility: hidden;
+    display: block;
+    height: 0;
+    clear: both;
+  }
+}
+.header-inner .segment-title {
+  clear: both;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+@media all and (min-width: 761px) {
+  .header-inner .segment-title {
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+}
+.header-inner .segment-title .title {
+  color: white;
+  font-weight: bold;
+  text-align: center;
+}
+@media all and (min-width: 761px) {
+  .header-inner .segment-title div.title, .header-inner .segment-title h1.title {
+    font-size: 3em;
+    line-height: 1.25em;
+    margin-top: 0.41667em;
+    margin-bottom: 0.41667em;
+  }
+}
+@media all and (max-width: 760px) {
+  .header-inner .segment-title div.title, .header-inner .segment-title h1.title {
+    font-size: 1.875em;
+    line-height: 1.33333em;
+    margin-top: 0.66667em;
+    margin-bottom: 0.66667em;
+    margin-bottom: 0;
+  }
+}
+
+.logo {
+  /* Wrapping link for logo */
+  float: right;
+  padding: 0;
+  margin: 0;
+}
+
+#name-and-slogan {
+  /* Wrapper for website name and slogan */
+  float: left;
+}
+
+#site-name {
+  /* The name of the website */
+  margin: 0;
+  font-size: 2em;
+  line-height: 1.5em;
+}
+#site-name a:link,
+#site-name a:visited {
+  color: #000;
+  text-decoration: none;
+}
+#site-name a:hover,
+#site-name a:focus {
+  text-decoration: underline;
+}
+
+#site-slogan {
+  /* The slogan (or tagline) of a website */
+  margin: 0;
+  font-size: 1em;
+}
+
+.region-header {
+  /* Wrapper for any blocks placed in the header region */
+}
+@media all and (min-width: 761px) {
+  .region-header {
+    margin-bottom: 2em;
+  }
+}
+
+/*
+ * Main (container for everything else)
+ */
+/*
+ * Content
+ */
+.breadcrumb {
+  /* The path to the current page in the form of a list of links */
+  clear: both;
+  font-size: 15px;
+}
+@media all and (max-width: 760px) {
+  .breadcrumb {
+    display: none;
+  }
+}
+.breadcrumb ol {
+  padding: 0;
+}
+.breadcrumb li {
+  display: inline;
+  list-style-type: none;
+  padding-right: .5em;
+}
+.breadcrumb a {
+  color: #0065a1;
+  display: inline-block;
+  padding-right: .5em;
+}
+.breadcrumb a.home {
+  background: transparent url("../images/home.png") no-repeat top;
+  height: 16px;
+  width: 17px;
+}
+.breadcrumb a.home:hover, .breadcrumb a.home:active {
+  background-position: bottom;
+}
+
+h1.title,
+h2.node-title,
+h2.block-title,
+h2.title,
+h2.comment-form,
+h3.title {
+  /* Comment title */
+  margin: 0;
+  line-height: normal;
+}
+
+/*h1.title, */
+#content h1 {
+  font-family: "HelveticaNeueW02-45Ligh", "Arial", sans-serif;
+  font-weight: normal;
+  margin-top: 0.33333em;
+  margin-bottom: 0.33333em;
+  margin-top: 0;
+}
+
+h2.pane-title {
+  font-family: "HelveticaNeueW02-45Ligh", "Arial", sans-serif;
+  font-weight: normal;
+  margin-top: 0.47619em;
+  margin-bottom: 0.47619em;
+  margin-top: 0;
+  line-height: normal;
+}
+
+.highlight_text {
+  border-left: 2px solid #0065a1;
+  padding-left: 15px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 1em;
+}
+.highlight_text:before {
+  border-top: 2px solid #0065a1;
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 40%;
+}
+.highlight_text div {
+  padding-top: 1.25em;
+  padding-bottom: 1.25em;
+}
+.highlight_text p {
+  padding-top: 1.25em;
+}
+.highlight_text h2, .highlight_text h3, .highlight_text h4 {
+  margin-bottom: 1.25em;
+  margin-top: 1.25em;
+}
+
+#maintenance_page {
+  background-color: #76ceea;
+}
+
+.highlight_blue_pane ul {
+  padding-left: 0;
+}
+.highlight_blue_pane ul li {
+  list-style: none;
+}
+.highlight_blue_pane ul li a:before {
+  content: "› ";
+}
+
+tr.even {
+  /* Some tables have rows marked even or odd. */
+  /* background-color: #eee; */
+  /* Drupal core uses a #eee background */
+}
+
+tr.odd {
+  /* background-color: #eee; */
+  /* Drupal core uses a #eee background */
+}
+
+tr.even, tr.odd {
+  background-color: transparent;
+  border-bottom: 0;
+}
+
+/* Special table styles */
+.field-name-body table {
+  border-collapse: separate;
+  border-bottom: 1px solid #505050;
+  font-size: 0.875em;
+  line-height: 1.42857em;
+}
+.field-name-body table p {
+  margin: .5em 0;
+}
+.field-name-body table tr th, .field-name-body table tr td {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.field-name-body table tr td {
+  border-bottom: 1px solid #d2d2d2;
+}
+.field-name-body table thead tr th {
+  background-color: #0065a1;
+  border-right: 1px solid #f0f0f0;
+  border-left: 1px solid #f0f0f0;
+  color: white;
+}
+.field-name-body table thead tr td {
+  background-color: #f0f0f0;
+  border-bottom: 1px solid #0065a1;
+}
+.field-name-body table tbody th {
+  background-color: #f0f0f0;
+  border-bottom: 1px solid white;
+}
+.field-name-body table tbody tr:hover {
+  color: white;
+}
+.field-name-body table tbody tr:hover th, .field-name-body table tbody tr:hover td {
+  background-color: #0065a1;
+  border-bottom: 1px solid transparent;
+}
+.field-name-body table tbody tr:last-child th, .field-name-body table tbody tr:last-child td {
+  border-bottom: 0 none;
+}
+
+table.block-table {
+  border-spacing: 2px;
+}
+table.block-table th, table.block-table td {
+  border: 0 none !important;
+  padding: 0.5em 20px;
+}
+table.block-table tbody tr td, table.block-table tbody tr:hover td {
+  background-color: white;
+  color: #505050;
+}
+table.block-table tbody tr th, table.block-table tbody tr:hover th {
+  background-color: #f0f0f0;
+  color: #505050;
+  font-weight: bold;
+}
+
+div.messages {
+  /* Important messages (status, warning, and error) for the user. See also the declarations in messages.css. */
+  margin: 1.5em 0;
+  /* Drupal core uses "6px 0" margin */
+}
+div.messages ul {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+div.status {
+  /* Normal priority messages */
+}
+
+div.warning,
+tr.warning {
+  /* Medium priority messages */
+  /* border: 1px solid #f0c020; */
+  /* Drupal core uses: 1px solid #f0c020 */
+}
+
+div.error,
+tr.error {
+  /* High priority messages. See also the .error declaration below. */
+}
+
+.error {
+  /* Errors that are separate from div.messages status messages. */
+  /* color: #e55; */
+  /* Drupal core uses a #e55 background */
+}
+
+.warning {
+  /* Warnings that are separate from div.messages status messages. */
+  /* color: #e09010; */
+  /* Drupal core uses a #e09010 background */
+}
+
+.tabs {
+  /* See also the tabs.css file. */
+}
+
+.region-help {
+  /* Help text on a page */
+}
+
+.more-help-link {
+  /* Link to more help */
+}
+
+.region-content {
+  /* Wrapper for the actual page content */
+}
+
+ul.inline {
+  /* List of links generated by theme_links() */
+  display: inline;
+  padding: 0;
+}
+ul.inline li {
+  display: inline;
+  list-style-type: none;
+  padding: 0 1em 0 0;
+  /* LTR */
+}
+
+span.field-label {
+  /* The inline field label used by the Fences module */
+  padding: 0 1em 0 0;
+  /* LTR */
+}
+
+.item-list .pager {
+  /* A list of page numbers when more than 1 page of content is available */
+  padding: 0;
+  margin: 1.25em 0;
+  letter-spacing: -0.5px;
+}
+.item-list .pager li {
+  font-size: 0.875em;
+  line-height: 1.42857em;
+  display: inline-block;
+  margin-bottom: 1em;
+  padding: 0;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.item-list .pager li a {
+  background-color: #0065a1;
+  color: white;
+  font-weight: normal;
+  padding: 0.5em 0.75em;
+}
+.item-list .pager li a:hover {
+  background-color: #d51968;
+}
+.item-list .pager li.pager-current {
+  background-color: #d2d2d2;
+  display: inline;
+  color: #505050;
+  padding: 0.5em 0.75em;
+}
+.item-list .pager li.pager-ellipsis {
+  display: inline;
+  padding: 0.5em;
+  color: #0065a1;
+}
+
+.feed-icon {
+  /* The link to the RSS or Atom feed for the current list of content */
+}
+
+.more-link {
+  /* Aggregator, blog, and forum more link */
+}
+
+.addthis_toolbox {
+  padding: 1em 0;
+  clear: left;
+  height: 16px;
+  margin-bottom: 1em;
+}
+.addthis_toolbox .addthis_item {
+  text-transform: uppercase;
+  float: left;
+  font-size: 12px;
+  line-height: 16px;
+  margin-right: 5px;
+}
+
+/* for all the iframes in all columns */
+.whelan-container iframe, .whelan-stacked-container iframe {
+  width: 100%;
+}
+
+/*
+ * Panels
+ */
+@media all and (max-width: 760px) {
+  .panel-panel {
+    width: 100%;
+    float: none;
+  }
+  .panel-panel .panel-panel-inner {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+@media all and (min-width: 761px) {
+  .whelan-column-content-region-inner, .whelan-stacked-column-content-region-inner {
+    margin-right: 40px;
+  }
+
+  .whelan-column2-inner, .whelan-stacked-column2-inner {
+    margin: 0;
+  }
+
+  .burr-flipped-content-inner,
+  .burr-sidebar-inner {
+    margin-right: 40px;
+  }
+
+  .whelan-column2 .panel-pane, .whelan-stacked-column2 .panel-pane {
+    width: 100%;
+    float: left;
+  }
+
+  .bryant-sidebar-inner,
+  .bartlett-sidebar-inner {
+    margin-right: 40px;
+  }
+
+  .bartlett-content-container .bartlett-content-column1 {
+    width: 70%;
+  }
+
+  .bartlett-content-container .bartlett-content-column2 {
+    width: 30%;
+  }
+}
+@media all and (min-width: 761px) and (max-width: 1023px) {
+  .whelan-column1, .whelan-stacked-column1 {
+    width: 40%;
+  }
+
+  .whelan-content, .whelan-stacked-content {
+    width: 60%;
+  }
+  .whelan-content .whelan-column-content-region-inner, .whelan-content .whelan-stacked-column-content-region-inner, .whelan-stacked-content .whelan-column-content-region-inner, .whelan-stacked-content .whelan-stacked-column-content-region-inner {
+    margin-right: 0;
+  }
+
+  .whelan-column2, .whelan-stacked-column2 {
+    width: 60%;
+    margin-left: 40%;
+  }
+}
+/* When page is viewed in an iframe */
+.viewmode-iframe {
+  font-size: 80%;
+}
+.viewmode-iframe #page {
+  background: transparent none;
+}
+.viewmode-iframe .panel-panel {
+  width: auto;
+}
+.viewmode-iframe [class*=sidebar] {
+  display: none;
+}
+.viewmode-iframe .bryant-sidebar {
+  display: none;
+}
+.viewmode-iframe #admin-menu {
+  display: none;
+}
+.viewmode-iframe.admin-menu, .viewmode-iframe.panels-ipe {
+  margin: 0 !important;
+}
+.viewmode-iframe.search-open-jobs .pane-page-title {
+  display: none;
+}
+.viewmode-iframe.search-open-jobs .pane-content h1 {
+  margin-top: 0.625em;
+  margin-bottom: 0.625em;
+}
+.viewmode-iframe.search-open-jobs #views-exposed-form-tieto-jobs-solr-search-panel-pane-1 {
+  display: none;
+}
+.viewmode-iframe.search-open-jobs #views-exposed-form-tieto-jobs-solr-search-panel-pane-1 .form-submit {
+  margin-top: 6px;
+  padding: 13px;
+}
+.viewmode-iframe.search-open-jobs .view-tieto-jobs-solr-search table {
+  margin-bottom: 0;
+  margin-top: 0;
+  width: 796px;
+}
+.viewmode-iframe.search-open-jobs .view-tieto-jobs-solr-search th, .viewmode-iframe.search-open-jobs .view-tieto-jobs-solr-search td {
+  padding: 0.5em;
+}
+.viewmode-iframe.search-open-jobs .view-tieto-jobs-solr-search tr.even {
+  background-color: #f0f0f0;
+}
+
+/*
+ * First sidebar (on left in LTR languages, on right in RTL)
+ *
+ * Remember to NOT add padding or margin to your .region-sidebar-first
+ * (see the layout.css file.)
+ */
+/*
+ * Second sidebar (on right in LTR languages, on left in RTL)
+ *
+ * Remember to NOT add padding or margin to your .region-sidebar-second
+ * (see the layout.css file.)
+ */
+/*
+ * Panels "sidebars"
+ */
+@media all and (min-width: 761px) {
+  .whelan-stacked-column1-inner .tieto-panel-styles-region,
+  .whelan-stacked-column1-inner .tieto-pane-wrapper,
+  .whelan-column1-inner .tieto-panel-styles-region,
+  .whelan-column1-inner .tieto-pane-wrapper,
+  .bryant-sidebar-inner .tieto-panel-styles-region,
+  .bryant-sidebar-inner .tieto-pane-wrapper,
+  .bartlett-sidebar-inner .tieto-panel-styles-region,
+  .bartlett-sidebar-inner .tieto-pane-wrapper {
+    overflow: visible;
+  }
+}
+@media all and (min-width: 761px) {
+  .whelan-stacked-column1-inner .panel-pane,
+  .whelan-column1-inner .panel-pane,
+  .bryant-sidebar-inner .panel-pane,
+  .bartlett-sidebar-inner .panel-pane {
+    position: relative;
+    overflow: visible;
+    padding: 20px;
+    z-index: 1;
+    padding-left: 0;
+  }
+  .whelan-stacked-column1-inner .panel-pane:before,
+  .whelan-column1-inner .panel-pane:before,
+  .bryant-sidebar-inner .panel-pane:before,
+  .bartlett-sidebar-inner .panel-pane:before {
+    background-color: #f8f8f8;
+    content: "";
+    position: absolute;
+    height: 100%;
+    top: 0;
+    width: 1220px;
+    z-index: -1;
+    right: 0;
+  }
+  .whelan-stacked-column1-inner .panel-pane .pane-content,
+  .whelan-column1-inner .panel-pane .pane-content,
+  .bryant-sidebar-inner .panel-pane .pane-content,
+  .bartlett-sidebar-inner .panel-pane .pane-content {
+    margin-bottom: 1em;
+    overflow: hidden;
+  }
+}
+.whelan-stacked-column1-inner .pane-node-field-magazine-issue .pane-content, .whelan-stacked-column1-inner .pane-node-field-magazine-issue .field,
+.whelan-column1-inner .pane-node-field-magazine-issue .pane-content,
+.whelan-column1-inner .pane-node-field-magazine-issue .field,
+.bryant-sidebar-inner .pane-node-field-magazine-issue .pane-content,
+.bryant-sidebar-inner .pane-node-field-magazine-issue .field,
+.bartlett-sidebar-inner .pane-node-field-magazine-issue .pane-content,
+.bartlett-sidebar-inner .pane-node-field-magazine-issue .field {
+  margin: 0;
+}
+@media all and (min-width: 761px) {
+  .whelan-stacked-column1-inner .drulog-panels-accordion,
+  .whelan-column1-inner .drulog-panels-accordion,
+  .bryant-sidebar-inner .drulog-panels-accordion,
+  .bartlett-sidebar-inner .drulog-panels-accordion {
+    width: auto;
+    position: relative;
+    overflow: visible;
+    padding: 20px;
+    z-index: 1;
+    padding-left: 0;
+  }
+  .whelan-stacked-column1-inner .drulog-panels-accordion:before,
+  .whelan-column1-inner .drulog-panels-accordion:before,
+  .bryant-sidebar-inner .drulog-panels-accordion:before,
+  .bartlett-sidebar-inner .drulog-panels-accordion:before {
+    background-color: #f8f8f8;
+    content: "";
+    position: absolute;
+    height: 100%;
+    top: 0;
+    width: 1220px;
+    z-index: -1;
+    right: 0;
+  }
+  .whelan-stacked-column1-inner .drulog-panels-accordion .panel-pane,
+  .whelan-column1-inner .drulog-panels-accordion .panel-pane,
+  .bryant-sidebar-inner .drulog-panels-accordion .panel-pane,
+  .bartlett-sidebar-inner .drulog-panels-accordion .panel-pane {
+    padding: 0;
+    position: static;
+  }
+  .whelan-stacked-column1-inner .drulog-panels-accordion .panel-pane:after,
+  .whelan-column1-inner .drulog-panels-accordion .panel-pane:after,
+  .bryant-sidebar-inner .drulog-panels-accordion .panel-pane:after,
+  .bartlett-sidebar-inner .drulog-panels-accordion .panel-pane:after {
+    content: none;
+  }
+}
+
+@media all and (min-width: 1024px) {
+  .whelan-column2-inner {
+    margin-top: 0.66667em;
+    padding: 0;
+    margin: 0;
+  }
+}
+
+/*
+* Panel pane overrides
+*/
+.whelan .tieto-panel-styles-region .tieto-pane-wrapper .panel-pane {
+  margin: 0 0 1em;
+}
+
+/*
+ * Page bottom
+ */
+.region-bottom {
+  /* Wrapper for any blocks placed in the page bottom region */
+}
+
+/* Cookie settings */
+.ccc-inner h2 {
+  background-image: none !important;
+  padding-left: 9px !important;
+  background-color: #efb061 !important;
+}
+
+#cccwr #cctoggle {
+  background: url("/sites/all/themes/tietocom/images/bg/cookie-scroll.png") repeat scroll 0 0 rgba(0, 0, 0, 0) !important;
+}
+#cccwr #cctoggle.cctoggle-on {
+  background-position: 100% 0 !important;
+}
+
+div#ccc-icon button {
+  background: url("/sites/all/themes/tietocom/images/bg/icon-cookie.png") repeat scroll 0 0 rgba(0, 0, 0, 0) !important;
+}
+
+.ccc-expand {
+  background: none repeat scroll 0 0 #efb061 !important;
+}
+
+.pane-bundle-quick-links .fieldable-panels-pane li {
+  margin-top: 8px;
+  text-align: center;
+}
+.pane-bundle-quick-links .fieldable-panels-pane li a {
+  background: none repeat scroll 0 0 #0065a1;
+  color: white;
+  display: block;
+  margin: 0 auto;
+  max-width: 140px;
+  padding: 8px;
+}
+.pane-bundle-quick-links .fieldable-panels-pane a:hover {
+  background: none repeat scroll 0 0 #d51968;
+}
+
+.views-field-field-crisis-message-1:before {
+  background-image: url("/sites/all/themes/tietocom/images/largecrisis.png");
+  content: "";
+  left: -89px;
+  margin-left: -52px;
+  padding: 39px 60px;
+  position: relative;
+  top: 68px;
+}
+@media all and (max-width: 760px) {
+  .views-field-field-crisis-message-1:before {
+    display: none;
+  }
+}
+
+#draw-wrapper {
+  background: none repeat scroll 0 0 #494949;
+  font-size: 18px;
+  font-family: arial;
+}
+#draw-wrapper a:hover {
+  text-decoration: underline;
+}
+#draw-wrapper .view-crisis-communication .views-field-body, #draw-wrapper .views-field-field-crisis-message-1 {
+  margin-left: 15%;
+}
+@media all and (max-width: 760px) {
+  #draw-wrapper .view-crisis-communication .views-field-body, #draw-wrapper .views-field-field-crisis-message-1 {
+    margin: 5%;
+  }
+}
+#draw-wrapper .views-field-body a {
+  color: white;
+  text-decoration: underline;
+}
+#draw-wrapper .views-field-body a:hover {
+  color: #0065a1;
+}
+#draw-wrapper .views-field-field-crisis-message a {
+  background: url("/sites/all/themes/tietocom/images/cris_icon_small.png") no-repeat scroll 0 7px transparent;
+  font-size: 21px;
+  padding: 12px 0 10px 2em;
+  color: white;
+  line-height: 30px;
+}
+#draw-wrapper .views-field-field-crisis-message-1 {
+  display: none;
+  font-size: 30px;
+  font-weight: 900;
+  padding-right: 15%;
+}
+#draw-wrapper .views-field-field-crisis-message-1 a {
+  color: white;
+  line-height: 30px;
+}
+#draw-wrapper .view-crisis-communication .field-content p {
+  margin: 0;
+}
+#draw-wrapper .block {
+  padding-bottom: 0.8em;
+  padding-top: 0.8em;
+}
+#draw-wrapper .views-field.views-field-colorbox {
+  text-align: right;
+  display: none;
+}
+#draw-wrapper .views-field.views-field-colorbox :hover {
+  text-decoration: underline;
+}
+#draw-wrapper #draw {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1140px;
+}
+#draw-wrapper #draw .block {
+  margin: 0;
+}
+#draw-wrapper .views-label.views-label-colorbox:after {
+  background: url("/sites/all/themes/tietocom/images/arrow_up_16.png") no-repeat scroll 0 2px transparent;
+  content: "";
+  margin-left: 5px;
+  padding-left: 16px;
+  text-decoration: none;
+}
+#draw-wrapper .views-field-field-open-all-the-time {
+  display: none;
+}
+#draw-wrapper .views-field-field-open-all-the-time a:hover {
+  text-decoration: underline;
+}
+#draw-wrapper .view-crisis-communication {
+  color: white;
+}
+#draw-wrapper .view-crisis-communication .views-field-body {
+  display: none;
+  padding-top: 20px;
+}
+
+.dnd-legend-wrapper {
+  font-size: 14px;
+  font-style: italic;
+  display: table-cell;
+}
+
+.dnd-library-wrapper {
+  z-index: 9999;
+}
+
+.dnd-atom-wrapper {
+  display: block;
+}

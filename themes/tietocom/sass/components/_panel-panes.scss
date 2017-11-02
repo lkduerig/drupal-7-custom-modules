@@ -1,0 +1,34 @@
+
+%highlight-pane {
+  background-color: $gray-13;
+}
+
+// Panel panes on specific content types
+.frontpage-content,
+.industryhub-container {
+  .panel-pane {
+    @extend %highlight-pane;
+    margin: 2px;
+    @include respond-to(handheld) {
+      margin-left: 0;
+      margin-right: 0;
+    }
+  }
+  .column-pane-last-visible {
+    @include fake-element(after);
+    &:after {
+      @extend %highlight-pane;
+      top: auto;
+      height: 600px;
+    }
+  }
+}
+
+// Specific panel panes
+.pane-tieto-page-highlights-carousel {
+  @extend %highlight-pane;
+  @include after-clearfix();
+  .content-carousel {
+    @include after-clearfix();
+  }
+}

@@ -1,0 +1,52 @@
+/**
+ * @file
+ * Tieto industry hub panel layout
+**/
+
+.industryhub {
+  margin: 2em auto;
+}
+
+.industryhub .panel-panel {
+  margin: 0;
+}
+
+.industryhub-column {
+  min-height: 1px;
+  width: 50%;
+  float: left;
+}
+
+.industryhub-column-inner {
+}
+
+.industryhub-column2 {
+  width: 50%;
+}
+
+.industryhub-column2-inner {
+}
+
+.industryhub .panel-pane {
+  margin: 2px;
+}
+
+/* iPhone [portrait + landscape] */
+@media only screen and (max-width: 480px) {
+  .industryhub-column,
+  .industryhub-column2 {
+    width: 100%;
+    float: none;
+  }
+
+  .industryhub-column-inner {
+  }
+
+  .industryhub .panel-pane {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+@media all and (min-width: 481px) {
+}

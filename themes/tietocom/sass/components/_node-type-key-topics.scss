@@ -1,0 +1,601 @@
+/*
+ * Key topics
+ */
+
+.node-type-key-topics {
+  .logo-click {
+    background: url("/sites/all/themes/tietocom/images/logo-new2.png") no-repeat scroll 0 0 rgba(0, 0, 0, 0);
+    height: 75px;
+    left: 20px;
+    position: absolute;
+    top: 20px;
+    width: 75px;
+    z-index: 20;
+  }
+  //Add a display:none class for key topics pages.
+  .breadcrumb {
+    display: none;
+  }
+  h2.pane-title {
+    @include adjust-font-size-to($h1-font-size);
+    @include leader(1, $h1-font-size);
+    @include trailer(0.5, $h1-font-size);
+    padding: 0 $gutter-width;
+  }
+  .key-topics-hidden, .concept-page-hidden {
+    display: none;
+  }
+  .key-topics-visible, .concept-page-visible {
+    display: inline;
+  }
+  .mobile-nav-key-topics {
+    @include respond-to(handheld) {
+      background: url("/sites/all/themes/tietocom/images/large/mobile_nav_white.png") no-repeat scroll 0 0 / 40px auto rgba(0, 0, 0, 0);
+      content: "";
+      cursor: pointer;
+      padding: 20px;
+      position: fixed;
+      right: 15px;
+      top: 20px;
+      z-index: 100;
+    }
+  }
+  #header div.header-image {
+    background-position: center top;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+  }
+  .view-key-topics-phases {
+    .views-field-title a {
+      @include adjust-font-size-to($h2-font-size);
+      @include title-font();
+      @include link-hover();
+      @include limit-lines(2, $h2-font-size);
+    }
+    .views-field-field-punchline {
+      font-size: 12px;
+      font-weight: 700;
+      img {
+        width: 280px;
+        height: 120px;
+        margin-bottom: 10px;
+      }
+    }
+  }
+  #page-title {
+    @include respond-to(handheld) {
+      padding-bottom: 30px;
+      padding-top: 30px;
+    }
+  }
+
+  #page {
+    overflow-x: hidden;
+  }
+  #header {
+    @include respond-to(handheld) {
+      padding-top: 76px;
+    }
+  }
+  .header-inner {
+    @include respond-to(handheld) {
+      @include fake-element();
+      &:before {
+        background-color: $primary-light-blue;
+        height: 75px;
+        position: fixed;
+        z-index: 10;
+      }
+    }
+    .logo {
+
+      display: none;
+      @include respond-to(handheld) {
+        @include box-sizing(border-box);
+        //      background: none repeat scroll 0 0 #63b3e3; // Poor kitty :(
+        display: block;
+        height: 75px;
+        padding: 15px;
+        top: 0;
+        position: fixed;
+      }
+    }
+  }
+  /* Maybe these blocks should be hidden in block configuration, but CSS is a quick solution. */
+  #block-tieto-megamenus-megamenu,
+  #block-menu-menu-customer-area,
+  .region-header .block-menu-block {
+    display: none;
+  }
+  .header__region {
+    @include respond-to(handheld) {
+      display: none;
+    }
+  }
+
+  .region-header {
+    background: transparent;
+  }
+
+  /* Parallax images in the middle */
+  .field-name-field-basic-image-image {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    @include respond-to(handheld) {
+      display: none;
+    }
+    img {
+      opacity: 0;
+    }
+  }
+  .field-name-field-basic-image-image, .extendright {
+    margin-right: -3000px;
+    padding-right: 3000px;
+  }
+  .field-name-field-basic-image-image, .extendleft {
+    margin-left: -3000px;
+    padding-left: 3000px;
+  }
+  /* General style overrides for header */
+
+  .header-inner {
+    @include respond-to(handheld) {
+      padding: 0 !important;
+    }
+    .segment-title {
+      margin: 100px auto;
+      @include respond-to(handheld) {
+        display: none;
+      }
+      .title {
+        @include title-font($banner-font-size, $alt-font-family-heavy);
+        text-align: left;
+      }
+      .show-header-block {
+        color: $primary-blue;
+      }
+    }
+    .segment-title .sub-title {
+      color: $white;
+      width: 80%;
+      @include adjust-font-size-to($h1-font-size);
+      @include title-font($h1-font-size, $alt-font-family-normal);
+      @include respond-to(handheld) {
+        display: none;
+      }
+    }
+  }
+  #header > .logo {
+    background-image: image-url('logo-new.png');
+    background-repeat: no-repeat;
+    width: 20%;
+    left: 0px;
+    position: absolute;
+    top: 0;
+    width: 20%;
+    min-width: 200px;
+    height: 180px;
+    z-index: 1;
+    @include respond-to(handheld) {
+      display: none;
+    }
+    @include respond-to(narrow) {
+      width: 18%;
+      height: 200px;
+    }
+    img {
+      visibility: hidden;
+    }
+  }
+
+  #header {
+    @include blue-sprite-theme(narrow);
+    @include respond-to(narrow) {
+      height: 510px;
+    }
+    #block-search-form .search-block-link a {
+      background-position: 0 -288px;
+    }
+  }
+  .region-header {
+    position: static;
+    @include respond-to(handheld) {
+      margin-right: 0;
+      .block {
+        float: right;
+      }
+    }
+    .region-header-right {
+      float: right;
+    }
+
+    #region_header_container {
+      max-width: inherit;
+      .region-header-right {
+        margin-right: 1.5em;
+      }
+    }
+  }
+
+  .header-inner {
+    height: 100%;
+    position: relative;
+  }
+  #navigation {
+    max-width: 996px !important;
+    .region-navigation {
+      position: absolute;
+      bottom: 25px;
+      @include respond-to(narrow-only) {
+        left: 0;
+        right: 0;
+      }
+      @include respond-to(handheld) {
+        position: relative;
+        bottom: 0;
+      }
+    }
+  }
+
+  #main {
+    max-width: 1000px;
+    margin: 0 auto;
+    #content {
+      padding: 0;
+      .panel-pane {
+        margin: 0;
+      }
+
+      .content-block-inner .conceptpage-container {
+        margin: 0 -10px;
+        @include respond-to(handheld) {
+          margin: 0;
+        }
+        @include respond-to(tab-portrait) {
+          margin: 0;
+        }
+        .panel-panel-inner {
+          @include respond-to(handheld) {
+            margin: 0;
+          }
+        }
+      }
+
+      /* portfolio */
+      .panel-pane.pane-key-topics-portfolio-panel-pane-1,
+      .panel-pane.pane-key-topics-portfolio-panel-pane-2 {
+        margin: 0;
+        padding: 0;
+        width: 50%;
+        float: left;
+        @include respond-to(handheld) {
+          width: 100%;
+          float: none;
+          display: block;
+        }
+        .view-key-topics-portfolio {
+          background-color: $gray-13;
+          margin: 10px;
+          @include respond-to(handheld) {
+            margin: 10px 0;
+          }
+          > .view-content {
+            padding: 10px 20px;
+            li.views-row > div {
+              padding: 0;
+            }
+          }
+        }
+
+        .field-content * {
+          max-width: 100% !important;
+        }
+      }
+
+      .panel-pane.pane-key-topics-portfolio-panel-pane-1 {
+        .item-list {
+          clear: both;
+          > h3 {
+            //            margin-bottom: 0;
+          }
+          &:first-child > h3 {
+            //            margin-top: 0;
+          }
+          li {
+            clear: both;
+            display: block;
+          }
+        }
+        .views-field {
+          //          padding: 0 !important;
+          //          margin: 10px 0 !important;
+          display: block;
+          clear: both;
+
+          .offering_data {
+            //            padding: 5px 0;
+            //            font-size: $base-font-size;
+            @include apply-margin();
+
+            .offerings_icon img {
+              float: left;
+              margin: 3px 20px 10px 0;
+              width: 90px !important;
+              height: 60px !important;
+              overflow: hidden;
+            }
+            .offerings_description {
+              //              padding-top: 5px;
+            }
+          }
+        }
+      }
+      /* portfolio ends */
+      /* No it doesn't - see below. */
+
+    }
+  }
+
+  .field-name-field-basic-image-image {
+    max-height: 270px;
+  }
+
+  .pane-key-topics-portfolio-offerings-panel-pane-2 {
+    float: left;
+  }
+  .pane-key-topics-portfolio-offerings-panel-pane-1 {
+    float: right;
+  }
+  .pane-key-topics-portfolio-offerings-panel-pane-1 h3 {
+    /* Poor kitten. :( */
+    //    font-size: 0.875em;
+    //    line-height: 1em;
+    //    margin-top: 1em;
+    //    margin-bottom: 1em;
+  }
+  .key-topics-visible {
+    display: block;
+    position: relative;
+    overflow: hidden;
+  }
+  .field.field-name-scald-thumbnail.field-type-image.field-label-hidden {
+    position: relative;
+    z-index: 1;
+  }
+
+  //tile close button
+  .tile-close {
+    text-align: center;
+    a {
+      @include adjust-font-size-to($sidebar-font-size);
+      padding: 2px 0 2px 20px;
+      background: url("/sites/all/themes/tietocom/images/Button_DarkBlue_Close.png") no-repeat scroll left center / 16px auto;
+      &:hover {
+        background-image: url("/sites/all/themes/tietocom/images/Button_DarkPink_Close.png");
+      }
+    }
+  }
+  //addtoany styling
+  .addtoany_list {
+    display: block;
+    padding-top: 30px;
+    a span.a2a_img {
+      display: inline-block;
+      height: 17px;
+      opacity: 1;
+      overflow: hidden;
+      width: 16px;
+      margin-bottom: 4px;
+    }
+  }
+
+  //Key topics webform styles
+  .node-webform {
+    background: $gray-13;
+    width: inherit;
+    margin: 0 10px;
+    padding: 0;
+    @include respond-to(handheld) {
+      width: 100%;
+      margin: 0;
+    }
+
+    .webform-client-form {
+      padding: 20px;
+      @include columns(2, 20px);
+
+      @include respond-to(handheld) {
+        @include columns();
+      }
+
+      .contact-form-ie-col-1 {
+        float: left;
+        width: 49%;
+        @include respond-to(handheld) {
+          float: none;
+          clear: both;
+          width: 100%;
+        }
+      }
+      .contact-form-ie-col-2 {
+        float: right;
+        width: 49%;
+        @include respond-to(handheld) {
+          float: none;
+          clear: both;
+          width: 100%;
+        }
+      }
+
+      &.ie-lte-9 {
+        label:not(.option) {
+          display: block;
+          font-weight: 400;
+        }
+      }
+
+      .form-item {
+        margin: 10px 0;
+        padding: 0;
+        width: 100%;
+        display: block;
+        position: relative;
+        overflow: hidden;
+
+        @include respond-to(handheld) {
+          clear: both;
+          display: block;
+          width: 100%;
+          padding: 0;
+        }
+
+        label {
+          font-weight: 400;
+          display: none;
+          &.option {
+            display: inline;
+          }
+        }
+
+        .form-text {
+          padding: 4px 6px;
+          width: 100%;
+          border: 0px solid;
+          color: $base-font-color;
+        }
+
+        .form-select {
+          padding: 3px 6px;
+          width: 99.5%;
+          margin-left: 4px;
+          border: 0px solid;
+          color: $base-font-color;
+          @include respond-to(handheld) {
+            margin-left: 0;
+            width: 100%;
+          }
+          @include respond-to(tab-landscape) {
+            float: right;
+            width: 98.5%;
+            margin-left: 0;
+          }
+          @include respond-to(normal) {
+            width: 100%;
+            margin-left: 0;
+          }
+        }
+
+        textarea {
+          border: 0;
+          padding: 5px;
+        }
+
+        .description {
+          margin: 10px 0;
+        }
+      }
+
+      #webform-component-Information-request,
+      .contact-form-ie-col-1 .form-item.form-type-radio {
+        margin-top: 0 !important;
+      }
+
+      .form-actions {
+        text-align: right;
+        background-color: #f5f5f5;
+        input {
+          background: $primary-light-blue;
+          &.form-submit {
+            margin: 0.5em 0;
+            float: right;
+          }
+        }
+      }
+
+      /*.form-item:nth-child(even) {
+  float: right;
+  padding-right: 0;
+  @include respond-to(handheld) {
+    float: left;
+    clear: both;
+    display: block;
+    width: 100%;
+    padding: 0;
+  }
+  .form-text {
+    float: right;
+    @include respond-to(handheld) {
+      float: left;
+    }
+  }
+}
+      */
+
+    }
+  }
+
+  .item-list {
+    .pager {
+      float: left;
+      margin: 0;
+      padding: 0;
+      width: 100%;
+
+      li {
+        padding-bottom: 0;
+        display: block;
+        text-transform: inherit;
+        text-align: center;
+        position: relative;
+        margin: 10px;
+        @include respond-to(handheld) {
+          margin: 10px 0;
+        }
+        @include respond-to(tab-portrait) {
+          margin: 10px;
+        }
+
+        a {
+          display: block;
+          background-color: $gray-13;
+          color: $primary-blue;
+          font-weight: 700;
+
+          &:before,
+          &:after {
+            content: ''; /* \002B */
+            background: url("/sites/all/themes/tietocom/images/Button_DarkBlue_Plus.png") no-repeat scroll left center / 16px auto;
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            position: absolute;
+            top: 10px;
+          }
+          &:before {
+            left: 15%;
+            @include respond-to(handheld) {
+              left: 5%;
+            }
+          }
+          &:after {
+            right: 15%;
+            @include respond-to(handheld) {
+              right: 5%;
+            }
+          }
+          &:hover {
+            color: $primary-red;
+            background-color: $gray-13;
+            &:before,
+            &:after {
+              background-image: url("/sites/all/themes/tietocom/images/Button_DarkPink_Plus.png");
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,195 @@
+/**
+ * @file
+ * Node Styling
+ *
+ * Style anything that isn't in the $content variable.
+ */
+                    /*
+$icons-spacing: 20px;
+$icons-position: 50%;
+@import "icons/*.png";
+
+$large-spacing: 20px;
+$large-position: 50%;
+@import "icons/large/*.png";
+*/
+.node {
+  /* Node wrapper */
+}
+.preview .node {
+  /* Preview of the content before submitting new or updated content */
+  /* background-color: #ffffea; */
+  /* Drupal core uses a #ffffea background */
+}
+.node .node-title {
+  /* Node title */
+}
+.node .user-picture {
+  /* The picture of the node author */
+}
+.node .submitted {
+  /* The "posted by" information */
+}
+.node .content {
+  /* Node's content wrapper */
+}
+.node ul.links {
+  /* Node links. See also the ul.links declaration in the pages.css. */
+}
+
+.node-promoted {
+  /* A node that has been promoted to the front page */
+}
+
+.node-sticky {
+  /* A sticky node (displayed before others in a list) */
+}
+
+.node-by-viewer {
+  /* A node created by the current user */
+}
+
+.node-teaser {
+  /* A node displayed as teaser */
+}
+
+article.view-mode-full {
+  /* A nofe displayed in a full page */
+  width: 75%;
+}
+
+/*
+ * All nodes are given a node-FOO class that describes the type of content that
+ * it is. If you create a new content type called "my-custom-type", it will
+ * receive a "node-my-custom-type" class.
+ */
+.node-page {
+  /* Page content node */
+}
+
+.node-article {
+  /* Article content node */
+}
+
+.node-tieto-jobs-vacancy {
+  max-width: 745px;
+}
+
+.node-unpublished {
+  /* Unpublished nodes */
+  /* background-color: #fff4f4; */
+  /* Drupal core uses a #fff4f4 background */
+}
+.node-unpublished p.unpublished {
+  /* The word "Unpublished" displayed underneath the content. */
+  height: 0;
+  overflow: visible;
+  color: #d8d8d8;
+  font-size: 75px;
+  line-height: 1;
+  font-family: Impact, "Arial Narrow", Helvetica, sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+  word-wrap: break-word;
+}
+
+.node-type-contact .region-header,
+.node-type-tieto-news-article .region-header {
+  padding-bottom: 4em;
+}
+
+.section-tieto-times-issue #header {
+  margin-bottom: .5em;
+  margin-bottom: 0;
+}
+
+.node-type-magazine-article .field-content.magazineheader img,
+.section-tieto-times-issue .field-content.magazineheader img,
+.section-magazines .field-content.magazineheader img {
+  position: absolute;
+  top: -160px;
+}
+.node-type-magazine-article .view-tieto-times .view-header img,
+.section-tieto-times-issue .view-tieto-times .view-header img,
+.section-magazines .view-tieto-times .view-header img {
+  position: absolute;
+  top: -160px;
+}
+.node-type-magazine-article #header .block-search, .node-type-magazine-article #header .block-menu, .node-type-magazine-article #header .block-menu-block, .node-type-magazine-article #header .block-tieto-megamenus,
+.section-tieto-times-issue #header .block-search,
+.section-tieto-times-issue #header .block-menu,
+.section-tieto-times-issue #header .block-menu-block,
+.section-tieto-times-issue #header .block-tieto-megamenus,
+.section-magazines #header .block-search,
+.section-magazines #header .block-menu,
+.section-magazines #header .block-menu-block,
+.section-magazines #header .block-tieto-megamenus {
+  display: none;
+}
+.node-type-magazine-article #header .region-header,
+.section-tieto-times-issue #header .region-header,
+.section-magazines #header .region-header {
+  height: 48px;
+  padding: 20px 59px 20px 0;
+  clear: both;
+}
+@media all and (max-width: 760px) {
+  .node-type-magazine-article #header .header-inner,
+  .section-tieto-times-issue #header .header-inner,
+  .section-magazines #header .header-inner {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .node-type-magazine-article #header .region-header,
+  .section-tieto-times-issue #header .region-header,
+  .section-magazines #header .region-header {
+    position: relative;
+  }
+}
+.node-type-magazine-article .breadcrumb,
+.section-tieto-times-issue .breadcrumb,
+.section-magazines .breadcrumb {
+  display: none;
+}
+.node-type-magazine-article #main,
+.section-tieto-times-issue #main,
+.section-magazines #main {
+  position: relative;
+}
+
+.dnd-atom-wrapper.type-image {
+  padding: 10px;
+}
+
+/* JS adds a class to the last visible pane per column, use this class to make the rows appear equal height */
+.node-type-industry-hub-page .industryhub-column {
+  min-height: 0;
+}
+.node-type-industry-hub-page .industryhub-column .panel-pane {
+  min-height: 1px;
+}
+.node-type-industry-hub-page .industryhub-column .panel-pane .pane-content:after {
+  content: ".";
+  visibility: hidden;
+  display: block;
+  height: 0;
+  clear: both;
+}
+@media all and (min-width: 761px) {
+  .node-type-industry-hub-page .industryhub-container {
+    overflow: hidden;
+  }
+  .node-type-industry-hub-page .industryhub-container .tieto-panel-styles-region, .node-type-industry-hub-page .industryhub-container .tieto-pane-wrapper {
+    overflow: visible;
+  }
+  .node-type-industry-hub-page .industryhub-container .panel-panel-inner {
+    position: relative;
+  }
+  .node-type-industry-hub-page .industryhub-container .panel-panel-inner .panel-pane {
+    margin-top: 4px;
+    margin-bottom: 0;
+    overflow: visible;
+    position: relative;
+  }
+}
