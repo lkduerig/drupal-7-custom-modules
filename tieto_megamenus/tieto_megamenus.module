@@ -1,0 +1,388 @@
+<?php
+
+/**
+ * @file
+ * Alters the menu item form to allow the administrator to specify the menu link as a megamenu
+ */
+
+/**
+ * Implements hook_permission().
+ */
+function tieto_megamenus_permission() {
+  return array(
+    'administer tieto megamenus' => array(
+      'title' => t('Administer tieto megamenus'),
+      'description' => t('Administer tieto megamenus.'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_library().
+ */
+function tieto_megamenus_library() {
+
+  $libraries['jquery.actual'] = array(
+    'title' => 'jQuery Actual',
+    'website' => 'http://dreamerslab.com/blog/en/get-hidden-elements-width-and-height-with-jquery/',
+    'version' => '1.0.14',
+    'js' => array(
+      libraries_get_path('jquery.actual') . '/jquery.actual.min.js' => array(),
+    ),
+    'dependencies' => array(
+      array('system', 'jquery'),
+    ),
+  );
+  return $libraries;
+}
+
+/**
+ * Implements hook_menu_breadcrumb_alter().
+ *
+ * Remove megamenu "roots" from breadcrumb.
+ */
+function tieto_megamenus_menu_breadcrumb_alter(&$active_trail, $item) {
+  $menus = variable_get('tieto_megamenus_enabled_menus', array());
+  $links = variable_get('tieto_megamenus_enabled_links', array());
+  foreach ($active_trail as $i => $link) {
+    if (isset($link['menu_name'], $link['mlid'], $menus[$link['menu_name']], $links[$link['mlid']])) {
+      unset($active_trail[$i]);
+      break;
+    }
+  }
+}
+
+/**
+ * Implementation of hook_block_info().
+ *
+ * Create a block with megamenu navigation
+ */
+function tieto_megamenus_block_info() {
+  $blocks['megamenu'] = array(
+    'info' => t('Megamenu navigation'),
+    'status' => 1,
+  );
+
+  return $blocks;
+}
+
+/**
+ * Implementation of hook_block_view().
+ *
+ * Block with megamenu navigation
+ */
+function tieto_megamenus_block_view($delta = '') {
+  $block = array();
+  switch ($delta) {
+    case 'megamenu':
+
+      $block['content'] = array(
+        array(
+        '#markup' => '<div id="megamenu"></div>',
+        '#prefix' => '<div class="megamenu-margin megamenu-left"></div>',
+        '#suffix' => '<div class="megamenu-margin megamenu-right"></div>',
+        )
+      );
+      //$tree = menu_tree_all_data('main-menu', NULL, 3);
+
+      break;
+
+  }
+  return $block;
+}
+
+/**
+ * Implementation of hook_init().
+ *
+ * Add necessary JS
+ */
+function tieto_megamenus_init() {
+  $megamenu_enabled_menus = variable_get('tieto_megamenus_enabled_menus', array());
+  if (in_array(TRUE, $megamenu_enabled_menus)) {
+    $options = array(
+      'group' => JS_LIBRARY,
+      'every_page' => TRUE,
+    );
+
+    drupal_add_library('tieto_megamenus', 'jquery.actual', TRUE);
+    drupal_add_js(drupal_get_path('module', 'tieto_megamenus') . '/tieto_megamenus.js', $options);
+    drupal_add_css(drupal_get_path('module', 'tieto_megamenus') . '/tieto_megamenus.css');
+  }
+}
+
+/*
+ * Add classes to menu links for either system menu blocks
+ * or blocks created by Menu Block module
+ */
+function tieto_megamenus_block_view_alter(&$data, $block) {
+  if (empty($data['content'])) {
+    return;
+  }
+  switch ($block->module) {
+    case 'menu_block':
+      // Add classes to block menu blocks.
+      $delta = $data['content']['#config']['menu_name'];
+      add_megamenu_classes($data['content']['#content'], $delta);
+      break;
+
+    case 'system':
+      // Add classes to Menu blocks.
+      add_megamenu_classes($data['content'], $block->delta);
+      break;
+  }
+}
+
+function add_megamenu_classes(&$menu_links = array(), $menu_name) {
+  $enabled_menus = variable_get('tieto_megamenus_enabled_menus', array());
+  $enabled_links = variable_get('tieto_megamenus_enabled_links', array());
+
+  if (!isset($enabled_menus[$menu_name])) {
+    // This block is not a menu.
+    return;
+  }
+
+  // Check that megamenus are enabled for this menu.
+  if ($enabled_menus[$menu_name]) {
+    foreach ($menu_links as $key => &$content) {
+      _tieto_megamenus_check_recursive($enabled_links, $key, $content);
+    }
+  }
+}
+
+function _tieto_megamenus_check_recursive($enabled_links, $key, &$content) {
+  if (is_numeric($key)) {
+    if (isset($enabled_links[$key])) {
+      $content['#attributes']['class'][] = 'megamenu-link';
+      if ($enabled_links[$key]['expand']) {
+        $content['#attributes']['class'][] = 'megamenu-link-expanded';
+      }
+    }
+
+    if (isset($content['#below']) && !empty($content['#below'])) {
+      foreach ($content['#below'] as $key => &$content) {
+        _tieto_megamenus_check_recursive($enabled_links, $key, $content);
+      }
+    }
+    else {
+      return;
+    }
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * Alters the menu settings form per menu with our menu attribute settings.
+ *
+ */
+function tieto_megamenus_form_alter(&$form, $form_state) {
+  if ($form['#form_id'] == 'menu_edit_menu') {
+    $menu_name = $form['menu_name']['#default_value'];
+    $megamenu_enabled_menus = variable_get('tieto_megamenus_enabled_menus', array());
+    $enabled = (isset($megamenu_enabled_menus[$menu_name]) && $megamenu_enabled_menus[$menu_name]) ? TRUE : FALSE;
+
+    $form['tieto_megamenus_enabled'] = array(
+      '#type' => 'checkbox',
+      '#title' => 'Megamenu enabled',
+      '#description' => t('Enable Tieto megamenus for this menu?'),
+      '#default_value' => $enabled,
+    );
+  }
+
+  if($form['#form_id'] == 'block_admin_configure') {
+    if ($form['module']['#value'] == 'menu_block') {
+      $form['#submit'][] = 'tieto_megamenus_block_form_submit';
+    }
+  }
+}
+
+/**
+ * Implements hook_form_submit().
+ */
+function tieto_megamenus_block_form_submit($form, &$form_state) {
+  variable_set('menu_block_' . $form_state['values']['delta'] . '_parent', $form_state['values']['menu_name']);
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * Adds menu attribute options to the edit menu item form.
+ *
+ * @see menu_edit_item()
+ * @see _tieto_megamenus_form_alter()
+ * @see tieto_megamenus_form_menu_edit_item_submit()
+ */
+function tieto_megamenus_form_menu_edit_item_alter(&$form, $form_state) {
+  $item = $form['original_item']['#value'];
+  _tieto_megamenus_form_alter($form, $item, $form);
+}
+
+function _tieto_megamenus_form_alter(array &$form, array $item = array(), array &$complete_form) {
+  $megamenu_enabled_menus = variable_get('tieto_megamenus_enabled_menus', array());
+
+  if (isset($megamenu_enabled_menus[$item['menu_name']]) && $megamenu_enabled_menus[$item['menu_name']]) {
+    $enabled_links = variable_get('tieto_megamenus_enabled_links', array());
+    $enabled = $enabled_links[$item['mlid']] ? TRUE : FALSE;
+    $expanded = ($enabled && $enabled_links[$item['mlid']]['expand']) ? TRUE : FALSE;
+
+    $form['tieto_megamenu'] = array(
+      '#access' => user_access('administer tieto megamenus'),
+      '#title' => t('Megamenu settings'),
+      '#type' => 'fieldset',
+    );
+
+    $form['tieto_megamenu']['tieto_megamenu_link'] = array(
+      '#access' => user_access('administer tieto megamenus'),
+      '#title' => t('Megamenu'),
+      '#type' => 'checkbox',
+      '#description' => t('If checked, this menu item will display children in a megamenu.'),
+      '#default_value' => $enabled,
+    );
+
+    $form['tieto_megamenu']['tieto_megamenu_link_expanded'] = array(
+      '#access' => user_access('administer tieto megamenus'),
+      '#title' => t('Two levels'),
+      '#type' => 'checkbox',
+      '#description' => t('Megamenu links show only one level of children by default. Check this option to show two levels.'),
+      '#default_value' => $expanded,
+    );
+
+    array_unshift($complete_form['#submit'], '_tieto_megamenus_form_submit');
+  }
+}
+
+/**
+ * Form submit handler for menu item links.
+ *
+ * Update megamenu option on link editing form
+ * hook_menu_link_update() is not executed when the form is submitted if nothing
+ * else is changed, so we must do this option differently.
+ */
+function _tieto_megamenus_form_submit($form, &$form_state) {
+  $link = $form_state['values'];
+
+  if ($link['mlid']) {
+    if(!_tieto_megamenus_link_update($link)) {
+      drupal_set_message(t('There was an error saving the megamenu option.'), 'error');
+    };
+  }
+}
+
+/**
+ * A custom menu was created.
+ * @param $menu
+ *   An array representing a custom menu:
+ *   - menu_name: The unique name of the custom menu.
+ *   - title: The human readable menu title.
+ *   - description: The custom menu description.
+ *
+ * @see hook_menu_update()
+ * @see hook_menu_delete()
+ */
+function tieto_megamenus_menu_insert($menu) {
+  if (isset($menu['form_id']) && $menu['form_id']=='menu_overview_form') {
+    $menus = variable_get('tieto_megamenus_enabled_menus', array());
+    $menus[$menu['menu_name']] = 0;
+    variable_set('tieto_megamenus_enabled_menus', $menus);
+  }
+}
+
+/**
+ * A custom menu was updated.
+ *
+ * @param $menu
+ *   An array representing a custom menu:
+ *   - menu_name: The unique name of the custom menu.
+ *   - title: The human readable menu title.
+ *   - description: The custom menu description.
+ *   - old_name: The current 'menu_name'. Note that internal menu names cannot
+ *     be changed after initial creation.
+ *
+ * @see hook_menu_insert()
+ * @see hook_menu_delete()
+ */
+function tieto_megamenus_menu_update($menu) {
+
+  if (!user_access('administer tieto megamenus')) {
+    return;
+  }
+
+  if (isset($menu['form_id']) && $menu['form_id']=='menu_edit_menu') {
+    $menus = variable_get('tieto_megamenus_enabled_menus', array());
+    $menus[$menu['menu_name']] = $menu['tieto_megamenus_enabled'];
+    variable_set('tieto_megamenus_enabled_menus', $menus);
+  }
+}
+
+/**
+ * A custom menu was deleted.
+ *
+ * @param $link
+ *   An array representing a custom menu:
+ *   - menu_name: The unique name of the custom menu.
+ *   - title: The human readable menu title.
+ *   - description: The custom menu description.
+ *
+ * @see hook_menu_insert()
+ * @see hook_menu_update()
+ */
+function tieto_megamenus_menu_delete($menu) {
+  $menus = variable_get('tieto_megamenus_enabled_menus', array());
+  if (isset($menus[$menu['menu_name']])) {
+    unset($menus[$menu['menu_name']]);
+  }
+  variable_set('tieto_megamenus_enabled_menus', $menus);
+}
+
+/**
+ * A custom menu link was inserted.
+ *
+ * @param $link
+ *   Associative array defining a menu link as passed into menu_link_save()
+ *
+ * @see hook_menu_link_update()
+ * @see hook_menu_link_delete()
+ */
+function tieto_megamenus_menu_link_insert($link) {
+  if(!_tieto_megamenus_link_update($link)) {
+    drupal_set_message(t('There was an error saving the megamenu option.'), 'error');
+  }
+}
+
+/**
+ * A custom menu link was deleted.
+ *
+ * @param $link
+ *   Associative array defining a menu link as passed into menu_link_save()
+ *
+ * @see hook_menu_link_insert()
+ * @see hook_menu_link_update()
+ */
+function tieto_megamenus_menu_link_delete($link) {
+  _tieto_megamenus_link_update($link);
+}
+
+/**
+ * Set menu link variables for megamenu links.
+ */
+function _tieto_megamenus_link_update($link) {
+  $links = variable_get('tieto_megamenus_enabled_links', array());
+
+  $enabled = isset($link['tieto_megamenu_link']) ? $link['tieto_megamenu_link'] : FALSE;
+  $expanded = isset($link['tieto_megamenu_link_expanded']) ? $link['tieto_megamenu_link_expanded'] : FALSE;
+  $mlid = $link['mlid'];
+
+  if ($enabled) {
+    $links[$mlid] = array(
+      'mlid' => $mlid,
+      'expand' => $expanded,
+    );
+  } elseif (!$enabled && isset($links[$mlid])) {
+    unset($links[$mlid]);
+  }
+  // Sort links array before saving.
+  ksort($links, SORT_NUMERIC);
+  variable_set('tieto_megamenus_enabled_links', $links);
+
+  return $link['mlid'];
+}

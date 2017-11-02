@@ -1,0 +1,27 @@
+7.x-1.0
+-------
+
+This module provides the Megamenu functionalities.
+
+Related JS files in /sites/all/themes/tietocom/js/megamenu.js
+
+Initial version of the module
+
+7.x-1.1
+-------
+
+Some major bug fixes as to related to menu settings not getting saved. There were two issues,
+
+   a.) the setting "Enable megamenu" did not work on the menu edit page because the checkbox was
+       being used on the e.g. /menu/manage/menu-india, it gets triggered only on /menu/manage/menu-india/edit
+   b.) The parent menu of a menu block did not get saved on the block edit page, option "Menu" on e.g.
+       /admin/structure/block/manage/menu_block/4/configure
+
+Moved the "Enable megamenu" checkbox to the menu edit page. Also had to write a custom submit hook to get the
+parent menu saved. This issue should be investigated further on the cause, perhaps updating menu_block module
+will resolve the issue. The excess function is to be found in tieto_megamenus.module lines 271 - 283 and the
+function is intiated at line 266 of the same module file.
+
+Jira issue: TIET-1680 Menus loosing settings when saved
+
+PR #244

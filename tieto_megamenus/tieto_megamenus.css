@@ -1,0 +1,44 @@
+.megamenu-block {
+  clear: both;
+}
+
+.megamenu-block ul.menu {
+  padding: 0;
+  margin: 0;
+}
+
+.megamenu-block li.megamenu-link {
+  position: relative;
+}
+
+.megamenu-block li.megamenu-link ul {
+  display: none;
+  position: absolute;
+}
+
+.megamenu-block li.megamenu-link ul ul {
+  padding: 0;
+  position: static;
+}
+
+.megamenu-block li.megamenu-link-expanded ul ul {
+  display: block;
+}
+
+.megamenu-block li.megamenu-link ul li {
+  margin: 1em 0;
+}
+.megamenu-block li.megamenu-link ul ul li {
+  margin: 0;
+}
+
+.megamenu-block li.megamenu-link ul a {
+  display: block;
+  margin-bottom: 0.5em;
+  margin-right: 1em;
+}
+
+.megamenu-block ul.menu li ul.menu li ul.menu li {
+  width: 100%;
+}
+

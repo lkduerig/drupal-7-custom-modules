@@ -1,0 +1,43 @@
+<?php
+
+/**
+* Implement hook_enable()
+*/
+function tieto_megamenus_enable() {
+  $menus = menu_get_menus(FALSE);
+  $megamenus = array_filter(variable_get('tieto_megamenus_enabled_menus', array()));
+  $array = array_fill_keys(array_flip($menus), 0);
+  $megamenus = array_replace($array, $megamenus);
+
+  variable_set('tieto_megamenus_enabled_menus', $megamenus);
+
+  $links = variable_get('tieto_megamenus_enabled_links', array());
+  variable_set('tieto_megamenus_enabled_links', $links);
+}
+
+/**
+ * Implementation of hook_uninstall()
+ */
+function tieto_megamenus_uninstall() {
+  variable_del('tieto_megamenus_enabled_menus');
+  variable_del('tieto_megamenus_enabled_links');
+}
+
+/**
+ * Change the structure of link arrays.
+ */
+function tieto_megamenus_update_7101() {
+  $ret = array();
+
+  $new_links = array();
+  $enabled_links = variable_get('tieto_megamenus_enabled_links', array());
+  foreach($enabled_links as $mlid) {
+    $new_links[$mlid] = array(
+      'mlid' => $mlid,
+      'expand' => 0,
+    );
+  }
+  variable_set('tieto_megamenus_enabled_links', $new_links);
+
+  return $ret;
+}
